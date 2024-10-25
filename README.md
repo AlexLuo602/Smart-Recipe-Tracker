@@ -7,7 +7,7 @@
 This project is a **personal health management app** designed to help users log and monitor their daily macro intake. Allows users to track their health goals based on individual factors, and provides tailored recipe suggestions to support their health objectives.
 
 ## Features
-- **Macro Intake Tracking**
+- **Tracking Macro Intake**
 - **Goal Tracking**
 - **Recipe Tracking and Suggestions**
 - **Health Data Logging**
