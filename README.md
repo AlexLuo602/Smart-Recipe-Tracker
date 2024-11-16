@@ -16,6 +16,13 @@ This project is a **personal health management app** designed to help users log 
 1. **Clone the Repository**: 
    ```bash
    git clone https://github.students.cs.ubc.ca/CPSC304-2024W-T1/project_k5l2e_k7i1t_v3d9u/
+2. **install npm in the project_k5l2e_k7i1t_v3d9u folder**: 
+   ```bash
+   npm install
+3. **run server locally**: 
+   ```bash
+   npm run dev
+   
 ## File Structure
 
 ```plaintext
