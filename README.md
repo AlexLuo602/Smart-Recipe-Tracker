@@ -16,24 +16,41 @@ This project is a **personal health management app** designed to help users log 
 1. **Clone the Repository**: 
    ```bash
    git clone https://github.students.cs.ubc.ca/CPSC304-2024W-T1/project_k5l2e_k7i1t_v3d9u/
-2. **install npm in the 'project_k5l2e_k7i1t_v3d9u folder'**: 
+2. **install npm in both back-end and front-end**: 
    ```bash
    npm install
-3. **run server locally**: 
+
+3. **run server both back-end and front-end in seperate terminal**: 
    ```bash
    npm run dev
    
 ## File Structure
 
 ```plaintext
-.
-├── node_modules/          # Project dependencies
-├── public/                # Static assets (e.g., icons, images)
-├── src/                   # Source code
-│   ├── App.jsx            # Main React component
-│   ├── index.css          # Global styles
-│   ├── main.jsx           # Entry point
-├── .gitignore             # Files to ignore in Git
-├── package.json           # Project metadata and dependencies
-├── vite.config.js         # Vite configuration
-├── README.md              # Project documentation
+your-project/
+├── front-end/              # Front-end code (React + Vite)
+│   ├── node_modules/
+│   ├── public/
+│   ├── src/
+│   │   ├── App.jsx
+│   │   ├── index.css
+│   │   └── main.jsx
+│   ├── .gitignore
+│   ├── package.json
+│   ├── vite.config.js
+│   └── README.md
+├── backend/                # Back-end code (Node.js + Express)
+│   ├── node_modules/
+│   ├── src/
+│   │   ├── controllers/
+│   │   ├── models/
+│   │   ├── routes/
+│   │   └── index.js
+│   ├── .gitignore
+│   ├── package.json
+│   └── README.md
+├── .gitignore              # Root Git ignore file
+└── README.md               # Project overview documentation
+```
+
+## File Structure
