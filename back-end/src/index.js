@@ -38,7 +38,6 @@ app.post('/api/user/:userId/addRecipe', (req, res) => {
     if (!userId || !recipe || !validUserIds.includes(parseInt(userId, 10))) { // check if request body is valid
         res.status(400).send({ message: 'Invalid user ID or recipe' });
     } else {
-        recipes[userId].push(recipe);
         res.send({ message: 'Recipe added successfully!' });
     }
 });
