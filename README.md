@@ -49,7 +49,6 @@ your-project/
 │   ├── .gitignore
 │   ├── package.json
 │   └── README.md
-├── .gitignore              # Root Git ignore file
 └── README.md               # Project overview documentation
 ```
 
