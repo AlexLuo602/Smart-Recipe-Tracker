@@ -1,15 +1,14 @@
 {
-  "name": "cpsc_304_project",
+  "name": "node_demo_project",
   "version": "1.0.0",
-  "description": "Alex, Jerold, and Jason's project for CPSC304.",
+  "description": "The sample Node.js project for CPSC304.",
   "main": "server.js",
   "keywords": [],
-  "authors": {
-    "names": "Alex Luo, Jerold Huang, Jason Liang"
+  "author": {
+    "name": "Zoe Yuan"
   },
   "license": "ISC",
   "dependencies": {
-    "dotenv": "^16.4.5",
     "express": "^4.17.3",
     "oracledb": "^5.2.0"
   }

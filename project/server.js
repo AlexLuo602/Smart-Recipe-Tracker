@@ -1,4 +1,3 @@
-require('dotenv').config();
 const express = require('express');
 const appController = require('./appController');
 
@@ -8,7 +7,7 @@ const loadEnvFile = require('./utils/envUtil');
 const envVariables = loadEnvFile('./.env');
 
 const app = express();
-const PORT = process.env.PORT || 65534;  // Adjust the PORT if needed (e.g., if you encounter a "port already occupied" error)
+const PORT = envVariables.PORT || 65534;  // Adjust the PORT if needed (e.g., if you encounter a "port already occupied" error)
 
 // Middleware setup
 app.use(express.static('public'));  // Serve static files from the 'public' directory
