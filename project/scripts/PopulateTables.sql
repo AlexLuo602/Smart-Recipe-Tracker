@@ -2,48 +2,13 @@ DROP TABLE MealRecord;
 DROP TABLE ExerciseRecord;
 DROP TABLE Goals;
 DROP TABLE Consumes;
-DROP TABLE BodyBuilderInfo;
-DROP TABLE DiabeticPersonInfo;
-DROP TABLE IngredientByBrand;
+DROP TABLE BodyBuilder;
+DROP TABLE DiabeticPerson;
+DROP TABLE Ingredient;
 DROP TABLE Step;
 DROP TABLE Recipe;
 DROP TABLE Macros;
-DROP TABLE IngredientInfo;
-DROP TABLE RecommendedSugarByInsulin;
-DROP TABLE RecommendedTrainingIntensity;
 DROP TABLE UserInfo;
-DROP TABLE RecommendedCaloriesForBodyType;
-
-CREATE TABLE RecommendedCaloriesForBodyType (
-   weight DECIMAL(5,2),
-   height DECIMAL(5,2),
-   gender VARCHAR(15),
-   age INT,
-   recommended_calorie_intake INT,
-   PRIMARY KEY (height, weight, gender, age)
-);
-grant select on RecommendedCaloriesForBodyType to public;
-
-CREATE TABLE RecommendedTrainingIntensity (
-    training_duration_months INT,
-    training_intensity DECIMAL(5,2),
-    PRIMARY KEY (training_duration_months)
-);
-grant select on RecommendedTrainingIntensity to public;
-
-CREATE TABLE RecommendedSugarByInsulin (
-    insulin_level DECIMAL(5,2),
-    recommended_sugar_intake INT,
-    PRIMARY KEY (insulin_level)
-);
-grant select on RecommendedSugarByInsulin to public;
-
-CREATE TABLE IngredientInfo (
-    name VARCHAR(255),
-    food_type VARCHAR(50),
-    PRIMARY KEY(name)
-);
-grant select on IngredientInfo to public;
 
 CREATE TABLE Macros (
     macro_id INT,              
@@ -71,23 +36,22 @@ CREATE TABLE UserInfo (
    height DECIMAL(5,2),
    gender VARCHAR(15),
    age INT,
-   PRIMARY KEY (user_id),
-   FOREIGN KEY (height, weight, gender, age) 
-       REFERENCES RecommendedCaloriesForBodyType(height, weight, gender, age)
+   recommended_calorie_intake INT,
+   PRIMARY KEY (user_id)
 );
 grant select on UserInfo to public;
 
-CREATE TABLE IngredientByBrand (
+CREATE TABLE Ingredient (
     name VARCHAR(255),
     brand VARCHAR(50),
     taste VARCHAR(255),
     macro_id INT NOT NULL,
+    food_type VARCHAR(50),
     PRIMARY KEY(name, brand),
     FOREIGN KEY(macro_id) REFERENCES Macros (macro_id),
-    FOREIGN KEY(name) REFERENCES IngredientInfo (name),
     UNIQUE (macro_id)
 );
-grant select on IngredientByBrand to public;
+grant select on Ingredient to public;
 
 CREATE TABLE MealRecord (
     meal_record_id INT,
@@ -145,24 +109,23 @@ CREATE TABLE Step (
 );
 grant select on Step to public;
 
-CREATE TABLE BodyBuilderInfo (
+CREATE TABLE BodyBuilder (
     body_builder_id INT,
     training_duration_months INT,
+    training_intensity DECIMAL(5,2),
     PRIMARY KEY (body_builder_id),
-    FOREIGN KEY (body_builder_id) REFERENCES UserInfo(user_id),
-    FOREIGN KEY (training_duration_months)
-        REFERENCES RecommendedTrainingIntensity(training_duration_months)
+    FOREIGN KEY (body_builder_id) REFERENCES UserInfo(user_id)
 );
-grant select on BodyBuilderInfo to public;
+grant select on BodyBuilder to public;
 
-CREATE TABLE DiabeticPersonInfo (
+CREATE TABLE DiabeticPerson (
     diabetic_person_id INT,
     insulin_level DECIMAL(5,2),
+    recommended_sugar_intake INT,
     PRIMARY KEY (diabetic_person_id),
-    FOREIGN KEY (diabetic_person_id) REFERENCES UserInfo (user_id),
-    FOREIGN KEY (insulin_level) REFERENCES RecommendedSugarByInsulin(insulin_level)
+    FOREIGN KEY (diabetic_person_id) REFERENCES UserInfo (user_id)
 );
-grant select on DiabeticPersonInfo to public;
+grant select on DiabeticPerson to public;
 
 
 INSERT INTO Macros (macro_id, fiber, sugar, fat, carbohydrates, protein, calories) 
@@ -195,110 +158,50 @@ VALUES (4, 'Steak Frites');
 INSERT INTO Recipe (recipe_id, name) 
 VALUES (5, 'Fettucine Alfredo');
 
-INSERT INTO RecommendedCaloriesForBodyType (weight, height, gender, age, recommended_calorie_intake) 
-VALUES (70.00, 175, 'Male', 30, 2500);
+INSERT INTO UserInfo (user_id, username, weight, height, gender, age, recommended_calorie_intake)
+VALUES (1, 'John Doe the 1st', 70.00, 175, 'Male', 30, 2500);
 
-INSERT INTO RecommendedCaloriesForBodyType (weight, height, gender, age, recommended_calorie_intake) 
-VALUES (80.00, 180, 'Male', 27, 2600);
+INSERT INTO UserInfo (user_id, username, weight, height, gender, age, recommended_calorie_intake)
+VALUES (2, 'John Doe the 2nd', 80.00, 180, 'Male', 27, 2700);
 
-INSERT INTO RecommendedCaloriesForBodyType (weight, height, gender, age, recommended_calorie_intake) 
-VALUES (90.00, 177, 'Male', 22, 2700);
+INSERT INTO UserInfo (user_id, username, weight, height, gender, age, recommended_calorie_intake)
+VALUES (3, 'John Doe the 3rd', 90.00, 177, 'Male', 22, 3000);
 
-INSERT INTO RecommendedCaloriesForBodyType (weight, height, gender, age, recommended_calorie_intake) 
-VALUES (77.00, 185, 'Male', 26, 2600);
+INSERT INTO UserInfo (user_id, username, weight, height, gender, age, recommended_calorie_intake)
+VALUES (4, 'John Doe the 4th', 77.00, 185, 'Male', 26, 2800);
 
-INSERT INTO RecommendedCaloriesForBodyType (weight, height, gender, age, recommended_calorie_intake) 
-VALUES (60.00, 170, 'Female', 32, 2000);
+INSERT INTO UserInfo (user_id, username, weight, height, gender, age, recommended_calorie_intake)
+VALUES (5, 'Janine Doe the 5th', 60.00, 170, 'Female', 32, 2300);
 
-INSERT INTO UserInfo (user_id, username, weight, height, gender, age)
-VALUES (1, 'John Doe the 1st', 70.00, 175, 'Male', 30);
+INSERT INTO Ingredient (name, brand, taste, macro_id, food_type) 
+VALUES ('Tomato', 'Campbellas', 'sweeter than average', 1, 'vegetables');
 
-INSERT INTO UserInfo (user_id, username, weight, height, gender, age)
-VALUES (2, 'John Doe the 2nd', 80.00, 180, 'Male', 27);
+INSERT INTO Ingredient (name, brand, taste, macro_id, food_type) 
+VALUES ('Chicken Breast', 'Western Family', 'dryer than other brands', 2, 'poultry');
 
-INSERT INTO UserInfo (user_id, username, weight, height, gender, age)
-VALUES (3, 'John Doe the 3rd', 90.00, 177, 'Male', 22);
+INSERT INTO Ingredient (name, brand, taste, macro_id, food_type) 
+VALUES ('Parmesan Cheese', 'Western Family', 'more fragrant than average', 3, 'dairy');
 
-INSERT INTO UserInfo (user_id, username, weight, height, gender, age)
-VALUES (4, 'John Doe the 4th', 77.00, 185, 'Male', 26);
+INSERT INTO Ingredient (name, brand, taste, macro_id, food_type) 
+VALUES ('Basil', 'Uncle Bens', 'looks fresher than average', 4, 'herbs');
 
-INSERT INTO UserInfo (user_id, username, weight, height, gender, age)
-VALUES (5, 'Janine Doe the 5th', 60.00, 170, 'Female', 32);
+INSERT INTO Ingredient (name, brand, taste, macro_id, food_type) 
+VALUES ('Olive Oil', 'Las Espadas', 'more viscous compared to others', 5, 'oil');
 
-INSERT INTO IngredientInfo (name, food_type) 
-VALUES ('Tomato', 'Vegetable');
+INSERT INTO BodyBuilder (body_builder_id, training_duration_months, training_intensity) 
+VALUES (1, 7, 50);
 
-INSERT INTO IngredientInfo (name, food_type) 
-VALUES ('Chicken Breast', 'Meat');
+INSERT INTO BodyBuilder (body_builder_id, training_duration_months, training_intensity) 
+VALUES (2, 8, 60);
 
-INSERT INTO IngredientInfo (name, food_type) 
-VALUES ('Parmesan Cheese', 'Dairy');
+INSERT INTO BodyBuilder (body_builder_id, training_duration_months, training_intensity) 
+VALUES (3, 9, 70);
 
-INSERT INTO IngredientInfo (name, food_type) 
-VALUES ('Basil', 'Herb');
+INSERT INTO BodyBuilder (body_builder_id, training_duration_months, training_intensity) 
+VALUES (4, 10, 80);
 
-INSERT INTO IngredientInfo (name, food_type) 
-VALUES ('Olive Oil', 'Fat');
-
-INSERT INTO IngredientByBrand (name, brand, taste, macro_id) 
-VALUES ('Tomato', 'Campbellas', 'sweeter than average', 1);
-
-INSERT INTO IngredientByBrand (name, brand, taste, macro_id) 
-VALUES ('Chicken Breast', 'Western Family', 'dryer than other brands', 2);
-
-INSERT INTO IngredientByBrand (name, brand, taste, macro_id) 
-VALUES ('Parmesan Cheese', 'Western Family', 'more fragrant than average', 3);
-
-INSERT INTO IngredientByBrand (name, brand, taste, macro_id) 
-VALUES ('Basil', 'Uncle Ben’s', 'looks fresher than average', 4);
-
-INSERT INTO IngredientByBrand (name, brand, taste, macro_id) 
-VALUES ('Olive Oil', 'Las Espadas', 'more viscous compared to others', 5);
-
-INSERT INTO RecommendedSugarByInsulin (insulin_level, recommended_sugar_intake) 
-VALUES (5.00, 55);
-
-INSERT INTO RecommendedSugarByInsulin (insulin_level, recommended_sugar_intake) 
-VALUES (6.50, 45);
-
-INSERT INTO RecommendedSugarByInsulin (insulin_level, recommended_sugar_intake) 
-VALUES (7.80, 35);
-
-INSERT INTO RecommendedSugarByInsulin (insulin_level, recommended_sugar_intake) 
-VALUES (9.20, 25);
-
-INSERT INTO RecommendedSugarByInsulin (insulin_level, recommended_sugar_intake) 
-VALUES (9.80, 20);
-
-INSERT INTO RecommendedTrainingIntensity (training_duration_months, training_intensity) 
-VALUES (7, 50);
-
-INSERT INTO RecommendedTrainingIntensity (training_duration_months, training_intensity) 
-VALUES (8, 60);
-
-INSERT INTO RecommendedTrainingIntensity (training_duration_months, training_intensity) 
-VALUES (9, 70);
-
-INSERT INTO RecommendedTrainingIntensity (training_duration_months, training_intensity) 
-VALUES (10, 80);
-
-INSERT INTO RecommendedTrainingIntensity (training_duration_months, training_intensity) 
-VALUES (11, 90);
-
-INSERT INTO BodyBuilderInfo (body_builder_id, training_duration_months) 
-VALUES (1, 7);
-
-INSERT INTO BodyBuilderInfo (body_builder_id, training_duration_months) 
-VALUES (2, 8);
-
-INSERT INTO BodyBuilderInfo (body_builder_id, training_duration_months) 
-VALUES (3, 9);
-
-INSERT INTO BodyBuilderInfo (body_builder_id, training_duration_months) 
-VALUES (4, 10);
-
-INSERT INTO BodyBuilderInfo (body_builder_id, training_duration_months) 
-VALUES (5, 11);
+INSERT INTO BodyBuilder (body_builder_id, training_duration_months, training_intensity) 
+VALUES (5, 11, 90);
 
 INSERT INTO MealRecord (meal_record_id, meal_record_date, user_id, recipe_id) 
 VALUES (1, TO_DATE('2024-10-15', 'YYYY-MM-DD'), 1, 1);
@@ -408,17 +311,17 @@ VALUES (2, 'Simmer cream, add cheese.', 5);
 INSERT INTO Step (step_number, description, recipe_id) 
 VALUES (3, 'Toss pasta in sauce.', 5);
 
-INSERT INTO DiabeticPersonInfo (diabetic_person_id, insulin_level) 
-VALUES (1, 5.00);
+INSERT INTO DiabeticPerson (diabetic_person_id, insulin_level, recommended_sugar_intake) 
+VALUES (1, 5.00, 55);
 
-INSERT INTO DiabeticPersonInfo (diabetic_person_id, insulin_level) 
-VALUES (2, 6.50);
+INSERT INTO DiabeticPerson (diabetic_person_id, insulin_level, recommended_sugar_intake) 
+VALUES (2, 6.50, 45);
 
-INSERT INTO DiabeticPersonInfo (diabetic_person_id, insulin_level) 
-VALUES (3, 7.80);
+INSERT INTO DiabeticPerson (diabetic_person_id, insulin_level, recommended_sugar_intake) 
+VALUES (3, 7.80, 35);
 
-INSERT INTO DiabeticPersonInfo (diabetic_person_id, insulin_level) 
-VALUES (4, 9.20);
+INSERT INTO DiabeticPerson (diabetic_person_id, insulin_level, recommended_sugar_intake) 
+VALUES (4, 9.20, 40);
 
-INSERT INTO DiabeticPersonInfo (diabetic_person_id, insulin_level) 
-VALUES (5, 9.80);
+INSERT INTO DiabeticPerson (diabetic_person_id, insulin_level, recommended_sugar_intake) 
+VALUES (5, 9.80, 20);

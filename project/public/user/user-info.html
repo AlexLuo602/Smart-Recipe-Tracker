@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- This meta tag ensures that the website renders correctly across different device sizes, enhancing mobile responsiveness. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Link to the external CSS stylesheet. Uncomment if you wish to customize or add styling. -->
+    <!-- <link rel="stylesheet" href="styles.css">   -->
+
+    <title>User Info</title>
+</head>
+<body>
+    <h2><a href="/">Return to Home Page</a></h2>
+
+    <br><hr><br> <!-- ========================================================================= -->
+
+    <!-- Show 'UserInfo'. 
+        Data will be fetched and inserted here dynamically using JavaScript. -->
+    <h2>Show UserInfo</h2>
+    <table id="userinfo" border="1">
+        <thead>
+            <tr>
+                <th>User ID</th>
+                <th>Username</th>
+                <th>Weight (kg)</th>
+                <th>Height (cm)</th>
+                <th>Gender</th>
+                <th>Age</th>
+                <th>Recommended Calorie Intake</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+    <br><hr><br> <!-- ========================================================================= -->
+
+    <h2> Insert Values into UserInfo </h2>
+    <form id="insertUserInfo">
+        User ID: <input type="number" id="insertId" placeholder="Enter ID" step="1" min="0" required> <br><br>
+        Username: <input type="text" id="insertName" placeholder="Enter Name" maxlength="25" required> <br><br>
+        Weight: <input type="number" id="insertWeight" placeholder="Enter Weight (kg)" step="0.01" max="999"> <br><br>
+        Height: <input type="number" id="insertHeight" placeholder="Enter Height (cm)" step="0.01" max="999"> <br><br>
+        Gender: <input type="text" id="insertGender" placeholder="Enter Gender" maxlength="15"> <br><br>
+        Age: <input type="number" id="insertAge" placeholder="Enter Age" step="1" min="0"> <br><br>
+        Recommended Caloric Intake: <input type="number" id="insertRCI" placeholder="Enter Calories" step="1" min="0"> <br><br>
+        
+        <button type="submit">Insert</button> <br>
+    </form>
+
+    <div id="insertResultMsg"></div>
+
+    <br><hr><br> <!-- ========================================================================= -->
+
+<h2>Update User Info</h2>
+<form id="updateUserInfo">
+        User ID: <input type="number" id="updateId" placeholder="required" step="1" min="0" required> <br><br>
+        Username: <input type="text" id="updateName" placeholder="optional" maxlength="25" > <br><br>
+        Weight: <input type="number" id="updateWeight" placeholder="optional" step="0.01" max="999"> <br><br>
+        Height: <input type="number" id="updateHeight" placeholder="optional" step="0.01" max="999"> <br><br>
+        Gender: <input type="text" id="updateGender" placeholder="optional" maxlength="15"> <br><br>
+        Age: <input type="number" id="updateAge" placeholder="optional" step="1" min="0"> <br><br>
+        Recommended Caloric Intake: <input type="number" id="updateRCI" placeholder="optional" step="1" min="0"> <br><br>
+
+    <button type="submit">Update</button>
+</form>
+    <!-- A placeholder to display messages related to the update operation. -->
+    <div id="updateUserInfoResultMsg"></div>
+
+    <br><hr><br> <!-- ========================================================================= -->
+
+    <h2>Count the Tuples in User Info</h2>
+    <button id="countUserInfo"> count </button> <br><br>
+    <!-- A placeholder to display the count result. -->
+    <div id="countResultMsg"></div> <br>
+
+    <!-- ===================================================================================== -->
+    <!-- External JavaScript file that contains the functionality/logic for the operations above. -->
+    <script src="/user/user-info-script.js"></script>
+</body>
+</html>

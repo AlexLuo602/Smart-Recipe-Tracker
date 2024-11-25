@@ -1,5 +1,6 @@
 const express = require('express');
-const appController = require('./appController');
+const appController = require('./rest/app/appController');
+const userController = require('./rest/user/userController');
 
 // Load environment variables from .env file
 // Ensure your .env file has the required database credentials.
@@ -16,13 +17,18 @@ app.use(express.json());             // Parse incoming JSON payloads
 // If you prefer some other file as default page other than 'index.html',
 //      you can adjust and use the bellow line of code to
 //      route to send 'DEFAULT_FILE_NAME.html' as default for root URL
-// app.get('/', (req, res) => {
-//     res.sendFile(__dirname + '/public/DEFAULT_FILE_NAME.html');
-// });
+app.get('/', (req, res) => {
+    res.sendFile(__dirname + '/public/home/home.html');
+});
+
+app.get('/user-info', (req, res) => {
+    res.sendFile(__dirname + '/public/user/user-info.html');
+});
 
 
-// mount the router
+// mount the routers
 app.use('/', appController);
+app.use('/', userController);
 
 
 // ----------------------------------------------------------

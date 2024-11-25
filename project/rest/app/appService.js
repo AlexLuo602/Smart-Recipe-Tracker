@@ -1,5 +1,6 @@
 const oracledb = require('oracledb');
-const loadEnvFile = require('./utils/envUtil');
+const loadEnvFile = require('../../utils/envUtil');
+const loadSQLFile = require('../../utils/sqlUtil');
 
 const envVariables = loadEnvFile('./.env');
 
@@ -76,77 +77,32 @@ async function testOracleConnection() {
     });
 }
 
-async function fetchDemotableFromDb() {
+async function initiateDatabase() {
     return await withOracleDB(async (connection) => {
-        const result = await connection.execute('SELECT * FROM DEMOTABLE');
-        return result.rows;
-    }).catch(() => {
-        return [];
-    });
-}
+        const content = loadSQLFile();
+        const commands = content.split('\n');
 
-async function initiateDemotable() {
-    return await withOracleDB(async (connection) => {
-        try {
-            await connection.execute(`DROP TABLE DEMOTABLE`);
-        } catch(err) {
-            console.log('Table might not exist, proceeding to create...');
+        for (const command of commands) {
+            if (command.startsWith("DROP TABLE")) {
+                "try to drop table"
+                try {
+                    await connection.execute(command);
+                } catch(err) {
+                    console.log(err);
+                    console.log('Table might not exist, proceeding to create...');
+                }
+            } else {
+                await connection.execute(command);
+            }
         }
 
-        const result = await connection.execute(`
-            CREATE TABLE DEMOTABLE (
-                id NUMBER PRIMARY KEY,
-                name VARCHAR2(20)
-            )
-        `);
         return true;
     }).catch(() => {
         return false;
     });
 }
 
-async function insertDemotable(id, name) {
-    return await withOracleDB(async (connection) => {
-        const result = await connection.execute(
-            `INSERT INTO DEMOTABLE (id, name) VALUES (:id, :name)`,
-            [id, name],
-            { autoCommit: true }
-        );
-
-        return result.rowsAffected && result.rowsAffected > 0;
-    }).catch(() => {
-        return false;
-    });
-}
-
-async function updateNameDemotable(oldName, newName) {
-    return await withOracleDB(async (connection) => {
-        const result = await connection.execute(
-            `UPDATE DEMOTABLE SET name=:newName where name=:oldName`,
-            [newName, oldName],
-            { autoCommit: true }
-        );
-
-        return result.rowsAffected && result.rowsAffected > 0;
-    }).catch(() => {
-        return false;
-    });
-}
-
-async function countDemotable() {
-    return await withOracleDB(async (connection) => {
-        const result = await connection.execute('SELECT Count(*) FROM DEMOTABLE');
-        return result.rows[0][0];
-    }).catch(() => {
-        return -1;
-    });
-}
-
 module.exports = {
     testOracleConnection,
-    fetchDemotableFromDb,
-    initiateDemotable, 
-    insertDemotable, 
-    updateNameDemotable, 
-    countDemotable
+    initiateDatabase
 };

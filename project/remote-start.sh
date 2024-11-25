@@ -47,7 +47,7 @@ for PORT in $(seq $START $END); do
         kill $TEMP_PID
 
         # Replace the bash process with the Node process
-        exec node server.js
+        exec node ./server.js
         break
     fi
 done
