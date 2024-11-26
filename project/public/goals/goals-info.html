@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- This meta tag ensures that the website renders correctly across different device sizes, enhancing mobile responsiveness. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Link to the external CSS stylesheet. Uncomment if you wish to customize or add styling. -->
+    <!-- <link rel="stylesheet" href="styles.css">   -->
+
+    <title>Goals Info</title>
+</head>
+<body>
+    <h2><a href="/">Return to Home Page</a></h2>
+
+    <br><hr><br> <!-- ========================================================================= -->
+
+    <!-- Show 'Goals'. 
+        Data will be fetched and inserted here dynamically using JavaScript. -->
+    <h2>Show Goals</h2>
+    <table id="goals" border="1">
+        <thead>
+            <tr>
+                <th>Goal ID</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Goals Type</th>
+                <th>Value Difference</th>
+                <th>User ID</th>
+                <th>Macro ID</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+    <br><hr><br> <!-- ========================================================================= -->
+
+    <h2> Insert Values into Goals </h2>
+    <form id="insertGoal">
+        Goal ID: <input type="number" id="insertGoalId" placeholder="Enter Goal ID" step="1" min="0" required> <br><br>
+        Start Date: <input type="date" id="insertStartDate" required> <br><br>
+        End Date: <input type="date" id="insertEndDate" required> <br><br>
+        Goals Type: <input type="text" id="insertGoalsType" placeholder="Enter Goal Type" maxlength="100" required> <br><br>
+        Value Difference: <input type="number" id="insertValueDiff" placeholder="Enter Value Difference" step="0.01" required> <br><br>
+        User ID: <input type="number" id="insertUserId" placeholder="Enter User ID" step="1" min="0" required> <br><br>
+        Macro ID: <input type="number" id="insertMacroId" placeholder="Enter Macro ID" step="1" min="0" required> <br><br>
+        
+        <button type="submit">Insert</button> <br>
+    </form>
+
+    <div id="insertResultMsg"></div>
+
+    <br><hr><br> <!-- ========================================================================= -->
+
+    <h2>Update Goal Info</h2>
+    <form id="updateGoal">
+            Goal ID: <input type="number" id="updateGoalId" placeholder="required" step="1" min="0" required> <br><br>
+            Start Date: <input type="date" id="updateStartDate" placeholder="optional"> <br><br>
+            End Date: <input type="date" id="updateEndDate" placeholder="optional"> <br><br>
+            Goals Type: <input type="text" id="updateGoalsType" placeholder="optional" maxlength="100"> <br><br>
+            Value Difference: <input type="number" id="updateValueDiff" placeholder="optional" step="0.01"> <br><br>
+            User ID: <input type="number" id="updateUserId" placeholder="optional" step="1" min="0"> <br><br>
+            Macro ID: <input type="number" id="updateMacroId" placeholder="optional" step="1" min="0"> <br><br>
+
+        <button type="submit">Update</button>
+    </form>
+    
+    <!-- A placeholder to display messages related to the update operation. -->
+    <div id="updateGoalResultMsg"></div>
+
+    <br><hr><br> <!-- ========================================================================= -->
+
+    <h2>Delete From Goals</h2>
+    <form id="deleteGoal">
+            Goal ID: <input type="number" id="deleteGoalId" placeholder="required" step="1" min="0" required> <br><br>
+        <button type="submit">Remove</button>
+    </form>
+    
+    <!-- A placeholder to display messages related to the delete operation. -->
+    <div id="deleteGoalResultMsg"></div>
+    <br><hr><br> <!-- ========================================================================= -->
+
+    <h2>Count the Tuples in Goals</h2>
+    <button id="countGoals"> count </button> <br><br>
+    <!-- A placeholder to display the count result. -->
+    <div id="countResultMsg"></div> <br>
+
+    <!-- ===================================================================================== -->
+    <!-- External JavaScript file that contains the functionality/logic for the operations above. -->
+    <script src="/goals/goals-info-script.js"></script>
+</body>
+</html>
