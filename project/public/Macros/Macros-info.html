@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- This meta tag ensures that the website renders correctly across different device sizes, enhancing mobile responsiveness. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Link to the external CSS stylesheet. Uncomment if you wish to customize or add styling. -->
+    <!-- <link rel="stylesheet" href="styles.css">   -->
+
+    <title>Macros Info</title>
+</head>
+<body>
+    <h2><a href="/">Return to Home Page</a></h2>
+
+    <br><hr><br> <!-- ========================================================================= -->
+
+    <!-- Show 'UserInfo'. 
+        Data will be fetched and inserted here dynamically using JavaScript. -->
+    <h2>Show UserInfo</h2>
+    <table id="userinfo" border="1">
+        <thead>
+            <tr>
+                <th>User ID</th>
+                <th>Username</th>
+                <th>Weight (kg)</th>
+                <th>Height (cm)</th>
+                <th>Gender</th>
+                <th>Age</th>
+                <th>Recommended Calorie Intake</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+    <br><hr><br> <!-- ========================================================================= -->
+
+    <h2> Insert Values into UserInfo </h2>
+    <form id="insertUserInfo">
+        User ID: <input type="number" id="insertId" placeholder="Enter ID" step="1" min="0" required> <br><br>
+        Username: <input type="text" id="insertName" placeholder="Enter Name" maxlength="25" required> <br><br>
+        Weight: <input type="number" id="insertWeight" placeholder="Enter Weight (kg)" step="0.01" max="999"> <br><br>
+        Height: <input type="number" id="insertHeight" placeholder="Enter Height (cm)" step="0.01" max="999"> <br><br>
+        Gender: <input type="text" id="insertGender" placeholder="Enter Gender" maxlength="15"> <br><br>
+        Age: <input type="number" id="insertAge" placeholder="Enter Age" step="1" min="0"> <br><br>
+        Recommended Caloric Intake: <input type="number" id="insertRCI" placeholder="Enter Calories" step="1" min="0"> <br><br>
+        
+        <button type="submit">Insert</button> <br>
+    </form>
+
+    <div id="insertResultMsg"></div>
+
+    <br><hr><br> <!-- ========================================================================= -->
+
+    <h2>Update User Info</h2>
+    <form id="updateUserInfo">
+            User ID: <input type="number" id="updateId" placeholder="required" step="1" min="0" required> <br><br>
+            Username: <input type="text" id="updateName" placeholder="optional" maxlength="25" > <br><br>
+            Weight: <input type="number" id="updateWeight" placeholder="optional" step="0.01" max="999"> <br><br>
+            Height: <input type="number" id="updateHeight" placeholder="optional" step="0.01" max="999"> <br><br>
+            Gender: <input type="text" id="updateGender" placeholder="optional" maxlength="15"> <br><br>
+            Age: <input type="number" id="updateAge" placeholder="optional" step="1" min="0"> <br><br>
+            Recommended Caloric Intake: <input type="number" id="updateRCI" placeholder="optional" step="1" min="0"> <br><br>
+
+        <button type="submit">Update</button>
+    </form>
+    
+    <!-- A placeholder to display messages related to the update operation. -->
+    <div id="updateUserInfoResultMsg"></div>
+
+    <br><hr><br> <!-- ========================================================================= -->
+
+    <h2>Delete From User Info</h2>
+    <form id="deleteUserInfo">
+            User ID: <input type="number" id="deleteId" placeholder="required" step="1" min="0" required> <br><br>
+        <button type="submit">Remove</button>
+    </form>
+    
+    <!-- A placeholder to display messages related to the delete operation. -->
+    <div id="deleteUserInfoResultMsg"></div>
+    <br><hr><br> <!-- ========================================================================= -->
+
+    <h2>Count the Tuples in User Info</h2>
+    <button id="countUserInfo"> count </button> <br><br>
+    <!-- A placeholder to display the count result. -->
+    <div id="countResultMsg"></div> <br>
+
+    <br><hr><br> <!-- ========================================================================= -->
+
+    <h2>Show Macros</h2>
+    <table id="macros" border="1">
+        <thead>
+            <tr>
+                <th>Macro ID</th>
+                <th>Fiber</th>
+                <th>Sugar</th>
+                <th>Fat</th>
+                <th>Carbohydrates</th>
+                <th>Protein</th>
+                <th>Calories</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+    <br><hr><br> <!-- ========================================================================= -->
+
+    <h2> Insert Values into Macros </h2>
+    <form id="insertMacros">
+        Macro ID: <input type="number" id="insertMacroId" placeholder="Enter Macro ID" step="1" min="0" required> <br><br>
+        Fiber: <input type="number" id="insertFiber" placeholder="Enter Fiber" step="1" min="0"> <br><br>
+        Sugar: <input type="number" id="insertSugar" placeholder="Enter Sugar" step="1" min="0"> <br><br>
+        Fat: <input type="number" id="insertFat" placeholder="Enter Fat" step="1" min="0"> <br><br>
+        Carbohydrates: <input type="number" id="insertCarbohydrates" placeholder="Enter Carbohydrates" step="1" min="0"> <br><br>
+        Protein: <input type="number" id="insertProtein" placeholder="Enter Protein" step="1" min="0"> <br><br>
+        Calories: <input type="number" id="insertCalories" placeholder="Enter Calories" step="1" min="0"> <br><br>
+        <button type="submit">Insert</button> <br>
+    </form>
+
+    <br><hr><br> <!-- ========================================================================= -->
+
+    <h2>Update Macros</h2>
+    <form id="updateMacros">
+        Macro ID: <input type="number" id="updateMacroId" placeholder="required" step="1" min="0" required> <br><br>
+        Fiber: <input type="number" id="updateFiber" placeholder="optional" step="1" min="0"> <br><br>
+        Sugar: <input type="number" id="updateSugar" placeholder="optional" step="1" min="0"> <br><br>
+        Fat: <input type="number" id="updateFat" placeholder="optional" step="1" min="0"> <br><br>
+        Carbohydrates: <input type="number" id="updateCarbohydrates" placeholder="optional" step="1" min="0"> <br><br>
+        Protein: <input type="number" id="updateProtein" placeholder="optional" step="1" min="0"> <br><br>
+        Calories: <input type="number" id="updateCalories" placeholder="optional" step="1" min="0"> <br><br>
+        <button type="submit">Update</button>
+    </form>
+
+    <!-- A placeholder to display messages related to the update operation. -->
+    <div id="updateMacrosResultMsg"></div>
+
+    <br><hr><br> <!-- ========================================================================= -->
+
+    <h2>Delete From Macros</h2>
+    <form id="deleteMacros">
+        Macro ID: <input type="number" id="deleteMacroId" placeholder="required" step="1" min="0" required> <br><br>
+        <button type="submit">Remove</button>
+    </form>
+
+    <!-- A placeholder to display messages related to the delete operation. -->
+    <div id="deleteMacrosResultMsg"></div>
+
+    <br><hr><br> <!-- ========================================================================= -->
+
+    <h2>Count the Tuples in Macros</h2>
+    <button id="countMacros"> count </button> <br><br>
+    <!-- A placeholder to display the count result. -->
+    <div id="countMacrosResultMsg"></div> <br>
+
+    <!-- ===================================================================================== -->
+    <!-- External JavaScript file that contains the functionality/logic for the operations above. -->
+    <script src="/Macros/Macros-info-script.js"></script>
+</body>
+</html>

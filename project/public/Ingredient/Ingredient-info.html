@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- This meta tag ensures that the website renders correctly across different device sizes, enhancing mobile responsiveness. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Link to the external CSS stylesheet. Uncomment if you wish to customize or add styling. -->
+    <!-- <link rel="stylesheet" href="styles.css">   -->
+
+    <title>Ingredient Info</title>
+</head>
+<body>
+    <h2><a href="/">Return to Home Page</a></h2>
+
+    <br><hr><br> <!-- ========================================================================= -->
+
+    <!-- Show 'Ingredient'. 
+        Data will be fetched and inserted here dynamically using JavaScript. -->
+    <h2>Show Ingredients</h2>
+    <table id="ingredientTable" border="1">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Brand</th>
+                <th>Taste</th>
+                <th>Food Type</th>
+                <th>Macro ID</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+    <br><hr><br> <!-- ========================================================================= -->
+
+    <h2> Insert Values into Ingredient </h2>
+    <form id="insertIngredientForm">
+        Name: <input type="text" id="insertName" placeholder="Enter Name" maxlength="255" required> <br><br>
+        Brand: <input type="text" id="insertBrand" placeholder="Enter Brand" maxlength="50" required> <br><br>
+        Taste: <input type="text" id="insertTaste" placeholder="Enter Taste" maxlength="255"> <br><br>
+        Food Type: <input type="text" id="insertFoodType" placeholder="Enter Food Type" maxlength="50"> <br><br>
+        Macro ID: <input type="number" id="insertMacroId" placeholder="Enter Macro ID" min="0" required> <br><br>
+        
+        <button type="submit">Insert</button> <br>
+    </form>
+
+    <div id="insertResultMsg"></div>
+
+    <br><hr><br> <!-- ========================================================================= -->
+
+    <h2>Update Ingredient</h2>
+    <form id="updateIngredientForm">
+            Name: <input type="text" id="updateName" placeholder="required" maxlength="255" required> <br><br>
+            Brand: <input type="text" id="updateBrand" placeholder="required" maxlength="50" required> <br><br>
+            Taste: <input type="text" id="updateTaste" placeholder="optional" maxlength="255"> <br><br>
+            Food Type: <input type="text" id="updateFoodType" placeholder="optional" maxlength="50"> <br><br>
+            Macro ID: <input type="number" id="updateMacroId" placeholder="optional" min="0"> <br><br>
+
+        <button type="submit">Update</button>
+    </form>
+    
+    <!-- A placeholder to display messages related to the update operation. -->
+    <div id="updateIngredientResultMsg"></div>
+
+    <br><hr><br> <!-- ========================================================================= -->
+
+    <h2>Delete From Ingredient</h2>
+    <form id="deleteIngredientForm">
+            Name: <input type="text" id="deleteName" placeholder="required" maxlength="255" required> <br><br>
+            Brand: <input type="text" id="deleteBrand" placeholder="required" maxlength="50" required> <br><br>
+        <button type="submit">Remove</button>
+    </form>
+    
+    <!-- A placeholder to display messages related to the delete operation. -->
+    <div id="deleteIngredientResultMsg"></div>
+    <br><hr><br> <!-- ========================================================================= -->
+
+    <h2>Count the Tuples in Ingredient</h2>
+    <button id="countIngredient"> count </button> <br><br>
+    <!-- A placeholder to display the count result. -->
+    <div id="countResultMsg"></div> <br>
+
+    <!-- ===================================================================================== -->
+    <!-- External JavaScript file that contains the functionality/logic for the operations above. -->
+    <script src="/Ingredient/Ingredient-info-script.js"></script>
+</body>
+</html>

@@ -2,6 +2,8 @@ const express = require('express');
 const appController = require('./rest/app/appController');
 const userController = require('./rest/user/userController');
 const goalsController = require('./rest/goals/goalsController');
+const macrosController = require('./rest/Macros/MacrosController');
+const ingredientController = require('./rest/Ingredient/IngredientController');
 
 
 // Load environment variables from .env file
@@ -31,11 +33,21 @@ app.get('/goals-info', (req, res) => {
     res.sendFile(__dirname + '/public/goals/goals-info.html');
 });
 
+app.get('/macros-info', (req, res) => {
+    res.sendFile(__dirname + '/public/Macros/Macros-info.html');
+});
+
+app.get('/ingredient-info', (req, res) => {
+    res.sendFile(__dirname + '/public/Ingredient/Ingredient-info.html');
+});
+
 
 // mount the routers
 app.use('/', appController);
 app.use('/', userController);
 app.use('/', goalsController);
+app.use('/', macrosController);
+app.use('/', ingredientController);
 
 // ----------------------------------------------------------
 // Starting the server
