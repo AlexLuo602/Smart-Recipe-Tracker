@@ -53,21 +53,32 @@
 
     <br><hr><br> <!-- ========================================================================= -->
 
-<h2>Update User Info</h2>
-<form id="updateUserInfo">
-        User ID: <input type="number" id="updateId" placeholder="required" step="1" min="0" required> <br><br>
-        Username: <input type="text" id="updateName" placeholder="optional" maxlength="25" > <br><br>
-        Weight: <input type="number" id="updateWeight" placeholder="optional" step="0.01" max="999"> <br><br>
-        Height: <input type="number" id="updateHeight" placeholder="optional" step="0.01" max="999"> <br><br>
-        Gender: <input type="text" id="updateGender" placeholder="optional" maxlength="15"> <br><br>
-        Age: <input type="number" id="updateAge" placeholder="optional" step="1" min="0"> <br><br>
-        Recommended Caloric Intake: <input type="number" id="updateRCI" placeholder="optional" step="1" min="0"> <br><br>
+    <h2>Update User Info</h2>
+    <form id="updateUserInfo">
+            User ID: <input type="number" id="updateId" placeholder="required" step="1" min="0" required> <br><br>
+            Username: <input type="text" id="updateName" placeholder="optional" maxlength="25" > <br><br>
+            Weight: <input type="number" id="updateWeight" placeholder="optional" step="0.01" max="999"> <br><br>
+            Height: <input type="number" id="updateHeight" placeholder="optional" step="0.01" max="999"> <br><br>
+            Gender: <input type="text" id="updateGender" placeholder="optional" maxlength="15"> <br><br>
+            Age: <input type="number" id="updateAge" placeholder="optional" step="1" min="0"> <br><br>
+            Recommended Caloric Intake: <input type="number" id="updateRCI" placeholder="optional" step="1" min="0"> <br><br>
 
-    <button type="submit">Update</button>
-</form>
+        <button type="submit">Update</button>
+    </form>
+    
     <!-- A placeholder to display messages related to the update operation. -->
     <div id="updateUserInfoResultMsg"></div>
 
+    <br><hr><br> <!-- ========================================================================= -->
+
+    <h2>Delete From User Info</h2>
+    <form id="deleteUserInfo">
+            User ID: <input type="number" id="deleteId" placeholder="required" step="1" min="0" required> <br><br>
+        <button type="submit">Remove</button>
+    </form>
+    
+    <!-- A placeholder to display messages related to the delete operation. -->
+    <div id="deleteUserInfoResultMsg"></div>
     <br><hr><br> <!-- ========================================================================= -->
 
     <h2>Count the Tuples in User Info</h2>

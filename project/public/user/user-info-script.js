@@ -118,6 +118,36 @@ async function updateUserInfo(event) {
     }
 }
 
+// Deletes given row in the userinfo.
+async function deleteUserInfo(event) {
+    event.preventDefault();
+    const userId = document.getElementById("deleteId").value;
+
+    const confirmation = confirm(`Are you sure you want to delete user with ID: ${userId}?`);
+    if (!confirmation) return;
+
+    const response = await fetch('/delete-from-userinfo', {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            user_id: userId
+        })
+    });
+
+    const responseData = await response.json();
+
+    const messageElement = document.getElementById('deleteUserInfoResultMsg');
+
+    if (responseData.success) {
+        messageElement.textContent = `removed user number ${userId} from UserInfo successfully!`;
+        fetchTableData();
+    } else {
+        messageElement.textContent = `user number ${userId} not found!`;
+    }
+}
+
 // Counts rows in the userinfo.
 // Modify the function accordingly if using different aggregate functions or procedures.
 async function countUserInfo() {
@@ -144,6 +174,7 @@ window.onload = function() {
     fetchTableData();
     document.getElementById("insertUserInfo").addEventListener("submit", insertUserInfo);
     document.getElementById("updateUserInfo").addEventListener("submit", updateUserInfo);
+    document.getElementById("deleteUserInfo").addEventListener("submit", deleteUserInfo);
     document.getElementById("countUserInfo").addEventListener("click", countUserInfo);
 };
 

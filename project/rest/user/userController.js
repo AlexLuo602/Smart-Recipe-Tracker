@@ -37,6 +37,16 @@ router.post("/update-userinfo", async (req, res) => {
     }
 });
 
+router.delete("/delete-from-userinfo", async (req, res) => {
+    const {user_id} = req.body;
+    const deleteResult = await userService.deleteFromUserInfo(user_id);
+    if (deleteResult) {
+        res.json({ success: true });
+    } else {
+        res.status(500).json({ success: false });
+    }
+});
+
 router.get('/count-userinfo', async (req, res) => {
     const tableCount = await userService.countUserInfo();
     if (tableCount >= 0) {

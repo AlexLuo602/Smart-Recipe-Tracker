@@ -67,6 +67,20 @@ async function updateUserInfo(user_id, ToUpdate) {
     });
 }
 
+async function deleteFromUserInfo(user_id) {
+    return await withOracleDB(async (connection) => {
+        const result = await connection.execute(
+            `DELETE FROM UserInfo WHERE user_id=:user_id`,
+            [user_id],
+            { autoCommit: true }
+        );
+
+        return result.rowsAffected && result.rowsAffected > 0;
+    }).catch(() => {
+        return false;
+    });
+}
+
 async function countUserInfo() {
     return await withOracleDB(async (connection) => {
         const result = await connection.execute('SELECT Count(*) FROM UserInfo');
@@ -78,7 +92,8 @@ async function countUserInfo() {
 
 module.exports = {
     fetchUserInfoFromDb,
-    insertUserInfo, 
-    updateUserInfo, 
+    insertUserInfo,
+    updateUserInfo,
+    deleteFromUserInfo,
     countUserInfo
 };
