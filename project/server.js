@@ -1,6 +1,8 @@
 const express = require('express');
 const appController = require('./rest/app/appController');
 const userController = require('./rest/user/userController');
+const goalsController = require('./rest/goals/goalsController');
+
 
 // Load environment variables from .env file
 // Ensure your .env file has the required database credentials.
@@ -25,11 +27,15 @@ app.get('/user-info', (req, res) => {
     res.sendFile(__dirname + '/public/user/user-info.html');
 });
 
+app.get('/goals-info', (req, res) => {
+    res.sendFile(__dirname + '/public/goals/goals-info.html');
+});
+
 
 // mount the routers
 app.use('/', appController);
 app.use('/', userController);
-
+app.use('/', goalsController);
 
 // ----------------------------------------------------------
 // Starting the server
