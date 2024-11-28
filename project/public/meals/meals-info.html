@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meal Records</title>
+</head>
+<body>
+    <h2>Meal Records</h2>
+    <table id="mealRecords" border="1">
+        <thead>
+            <tr>
+                <th>Meal Record ID</th>
+                <th>Meal Record Date</th>
+                <th>User ID</th>
+                <th>Recipe ID</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <h2>Insert Meal Record</h2>
+    <form id="insertMealRecord">
+        Meal Record ID: <input type="number" id="insertMealRecordId" required><br>
+        Meal Record Date: <input type="date" id="insertMealRecordDate" required><br>
+        User ID: <input type="number" id="insertUserId" required><br>
+        Recipe ID: <input type="number" id="insertRecipeId" required><br>
+        <button type="submit">Insert</button>
+    </form>
+    <div id="insertResultMsg"></div>
+
+    <h2>Update Meal Record</h2>
+    <form id="updateMealRecord">
+        Meal Record ID: <input type="number" id="updateMealRecordId" required><br>
+        Meal Record Date: <input type="date" id="updateMealRecordDate"><br>
+        User ID: <input type="number" id="updateUserId"><br>
+        Recipe ID: <input type="number" id="updateRecipeId"><br>
+        <button type="submit">Update</button>
+    </form>
+    <div id="updateResultMsg"></div>
+
+    <h2>Delete Meal Record</h2>
+    <form id="deleteMealRecord">
+        Meal Record ID: <input type="number" id="deleteMealRecordId" required><br>
+        <button type="submit">Delete</button>
+    </form>
+    <div id="deleteResultMsg"></div>
+
+    <h2>Count Meal Records</h2>
+    <button id="countMealRecords">Count</button>
+    <div id="countResultMsg"></div>
+
+    <script>
+        // JavaScript to handle operations
+        // Add functions like fetchAndDisplayMealRecords, insertMealRecord, updateMealRecord, deleteMealRecord, countMealRecords
+    </script>
+</body>
+</html>

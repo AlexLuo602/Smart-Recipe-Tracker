@@ -2,9 +2,10 @@ const express = require('express');
 const appController = require('./rest/app/appController');
 const userController = require('./rest/user/userController');
 const goalsController = require('./rest/goals/goalsController');
+const mealsController = require('./rest/meals/mealsController');
 const macrosController = require('./rest/Macros/MacrosController');
+const exercisesController = require('./rest/exercise/exercisesController');
 const ingredientController = require('./rest/Ingredient/IngredientController');
-
 
 // Load environment variables from .env file
 // Ensure your .env file has the required database credentials.
@@ -41,12 +42,21 @@ app.get('/ingredient-info', (req, res) => {
     res.sendFile(__dirname + '/public/Ingredient/Ingredient-info.html');
 });
 
+app.get('/meals-info', (req, res) => {
+    res.sendFile(__dirname + '/public/meals/meals-info.html');
+});
+
+app.get('/exercise-info', (req, res) => {
+    res.sendFile(__dirname + '/public/exercise/exercise-info.html');
+});
 
 // mount the routers
 app.use('/', appController);
 app.use('/', userController);
+app.use('/', mealsController);
 app.use('/', goalsController);
 app.use('/', macrosController);
+app.use('/', exercisesController);
 app.use('/', ingredientController);
 
 // ----------------------------------------------------------

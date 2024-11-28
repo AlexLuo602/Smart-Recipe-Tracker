@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- This meta tag ensures that the website renders correctly across different device sizes, enhancing mobile responsiveness. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Link to the external CSS stylesheet. Uncomment if you wish to customize or add styling. -->
+    <!-- <link rel="stylesheet" href="styles.css">   -->
+
+    <title>Exercise Info</title>
+</head>
+<body>
+    <h2><a href="/">Return to Home Page</a></h2>
+
+    <br><hr><br> <!-- ========================================================================= -->
+
+    <!-- Show 'Goals'. 
+        Data will be fetched and inserted here dynamically using JavaScript. -->
+    <h2>Show Exercise</h2>
+    <table id="exercises" border="1">
+        <thead>
+            <tr>
+                <th>Exercise Record ID</th>
+                <th>Record Date</th>
+                <th>Calories Burnt</th>
+                <th>Exercise Type</th>
+                <th>User ID</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+    <br><hr><br> <!-- ========================================================================= -->
+
+    <h2> Insert Values into ExerciseRecord </h2>
+    <form id="insertExerciseRecord">
+        Exercise Record ID: <input type="number" id="insertExerciseRecordId" placeholder="Enter Exercise ID" step="1" min="0" required> <br><br>
+        Record Date: <input type="date" id="insertDate" required> <br><br>
+        Calories Burnt: <input type="number" id="insertCalories" required> <br><br>
+        Exercise Type: <input type="text" id="insertType" placeholder="Enter Type" maxlength="100" required> <br><br>
+        User ID: <input type="number" id="insertUserId" placeholder="Enter User ID" step="1" min="0" required> <br><br>
+        <button type="submit">Insert</button> <br>
+    </form>
+
+    <div id="insertResultMsg"></div>
+
+    <br><hr><br> <!-- ========================================================================= -->
+
+    <h2>Update Exercise Info</h2>
+    <form id="updateExerciseRecord">
+        Exercise Record ID: <input type="number" id="updateExerciseRecordId" placeholder="Enter Exercise ID" step="1" min="0" required> <br><br>
+        Record Date: <input type="date" id="updateDate" required> <br><br>
+        Calories Burnt: <input type="number" id="updateCalories" required> <br><br>
+        Exercise Type: <input type="text" id="updateType" placeholder="Enter Type" maxlength="100" required> <br><br>
+        User ID: <input type="number" id="updateUserId" placeholder="Enter User ID" step="1" min="0" required> <br><br>
+        <button type="submit">Update</button>
+    </form>
+    
+    <!-- A placeholder to display messages related to the update operation. -->
+    <div id="updateExerciseRecordResultMsg"></div>
+
+    <br><hr><br> <!-- ========================================================================= -->
+
+    <h2>Delete From Exercise</h2>
+    <form id="deleteExerciseRecord">
+            Goal ID: <input type="number" id="deleteExerciseRecordId" placeholder="required" step="1" min="0" required> <br><br>
+        <button type="submit">Remove</button>
+    </form>
+    
+    <!-- A placeholder to display messages related to the delete operation. -->
+    <div id="deleteExerciseRecordResultMsg"></div>
+    <br><hr><br> <!-- ========================================================================= -->
+
+    <!-- ===================================================================================== -->
+    <!-- External JavaScript file that contains the functionality/logic for the operations above. -->
+    <script src="/exercise/exercise-info-script.js"></script>
+</body>
+</html>
