@@ -50,11 +50,52 @@ async function insertMealRecord(event) {
     }
 }
 
-window.onload = function() {
+
+async function searchRecipes(event) {
+    event.preventDefault();
+    const conditionString = document.getElementById("searchConditions").value;
+    console.log('Attempting to search with:', conditionString);
+
+    const response = await fetch('/search-recipes', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ conditionString })
+    });
+
+    const responseData = await response.json();
+    if (responseData.error) {
+        console.log('Search error:', responseData.error);
+        alert(responseData.error);
+    } else {
+        console.log('Search results:', responseData.data);
+        displaySearchResults(responseData.data);
+    }
+}
+
+function displaySearchResults(records) {
+    const resultsDiv = document.getElementById('searchResults');
+    if (records.length === 0) {
+        resultsDiv.textContent = "No records found.";
+        return;
+    }
+
+    let html = '<table border="1"><thead><tr><th>Recipe ID</th><th>Name</th></tr></thead><tbody>';
+    records.forEach(record => {
+        html += `<tr><td>${record[0]}</td><td>${record[1]}</td></tr>`;
+    });
+    html += '</tbody></table>';
+    resultsDiv.innerHTML = html;
+}
+
+document.addEventListener('DOMContentLoaded', function() {
     fetchMealRecordData();
     document.getElementById("insertrecipe").addEventListener("submit", insertMealRecord);
-};
+    document.getElementById("searchRecipesForm").addEventListener("submit", searchRecipes);
+});
 
 function fetchMealRecordData() {
+
     fetchAndDisplayRecipeRecords();
 }

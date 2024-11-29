@@ -165,6 +165,32 @@ async function fetchAndDisplayAverageCaloriesBurned() {
     tableElement.style.display = "table";
 }
 
+
+async function fetchAndDisplayHighCalorieExercises() {
+    const tableElement = document.getElementById('highCalorieExercisesTable');
+    const tableBody = tableElement.querySelector('tbody');
+
+    const response = await fetch('/highCalorieExercises', {
+        method: 'GET'
+    });
+
+    const responseData = await response.json();
+    const exerciseContent = responseData.data;
+
+    if (tableBody) {
+        tableBody.innerHTML = '';
+    }
+
+    exerciseContent.forEach(exercise => {
+        const row = tableBody.insertRow();
+        const typeCell = row.insertCell(0);
+        const caloriesCell = row.insertCell(1);
+        typeCell.textContent = exercise[0];
+        caloriesCell.textContent = exercise[1];
+    });
+    tableElement.style.display = "table";
+}
+
 // ---------------------------------------------------------------
 // Initializes the webpage functionalities.
 // Add or remove event listeners based on the desired functionalities.
@@ -173,6 +199,7 @@ window.onload = function() {
     document.getElementById("insertExerciseRecord").addEventListener("submit", insertExerciseRecord);
     document.getElementById("updateExerciseRecord").addEventListener("submit", updateExerciseRecord);
     document.getElementById("deleteExerciseRecord").addEventListener("submit", deleteExerciseRecord);
+    document.getElementById('fetchHighCalorieExercises').addEventListener('click', fetchAndDisplayHighCalorieExercises);
 };
 
 // General function to refresh the displayed table data. 

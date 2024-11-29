@@ -11,13 +11,12 @@
     <table id="recipes" border="1">
         <thead>
             <tr>
-                <th>Recipe ID</th>
+                <th>recipe_id</th>
                 <th>Name</th>
             </tr>
         </thead>
         <tbody></tbody>
     </table>
-
     <h2>Insert Recipe Record</h2>
     <form id="insertrecipe">
         Recipe ID: <input type="number" id="insertRecipeId" required><br>
@@ -26,6 +25,12 @@
     </form>
     <div id="insertResultMsg"></div>
 
+    <h2>Search Recipes</h2>
+    <form id="searchRecipesForm">
+    Conditions: <input type="text" id="searchConditions" required>
+    <button type="submit">Search</button>
+    </form>
+    <div id="searchResults"></div>
     <script src="/recipe/recipe-info-script.js"></script>
 </body>
 </html>
