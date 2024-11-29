@@ -18,4 +18,17 @@ router.post('/insert-recipe', async (req, res) => {
     }
 });
 
+router.post('/select-recipes', async (req, res) => {
+    const { recipe_id } = req.body;
+    console.log("CHUAIJMKJHUBGBHINUYG")
+    console.log(recipe_id)
+    try {
+        const records = await recipeService.selectRecipes(Number(recipe_id));
+        res.json({ data: records });
+    } catch (error) {
+        console.error('Error fetching steps:', error);
+        res.status(500).json({ error: 'Failed to fetch steps.' });
+    }
+});
+
 module.exports = router;

@@ -79,7 +79,6 @@ async function countMealRecords() {
 
 async function getMealsForUser(userId) {
     return await withOracleDB(async (connection) => {
-        console.log("TIS THE USER ID")
         console.log(userId)
         try {
             const query = `

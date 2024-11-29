@@ -18,6 +18,24 @@
         <tbody></tbody>
     </table>
 
+    <h1>Steps For Recipe</h1>
+    <label for="recipeId">Enter Recipe ID:</label>
+    <input type="number" id="recipeId" placeholder="Recipe ID">
+    <button id="fetchSteps">Fetch Steps for Recipe</button>
+
+    <p id="recipeName" style="display: none;"></p>
+    <table id="stepsTable" style="display: none;">
+        <thead>
+            <tr>
+                <th>Step Number</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <p id="errorMessage" style="display: none;"></p>
+
     <h2>Insert Recipe Record</h2>
     <form id="insertrecipe">
         Recipe ID: <input type="number" id="insertRecipeId" required><br>
