@@ -73,5 +73,13 @@ router.get('/users-with-more-than-three-meals', async (req, res) => {
     }
 });
 
-
+router.get('/users-with-all-exercises', async (req, res) => {
+    try {
+        const users = await userService.findUsersWithAllExercises();
+        res.json({ data: users });
+    } catch (err) {
+        console.error('Error fetching users with all exercises:', err);
+        res.status(500).json({ error: 'Error fetching users with all exercises' });
+    }
+});
 module.exports = router;

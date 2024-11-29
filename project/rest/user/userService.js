@@ -115,11 +115,29 @@ async function findUsersWithMoreThanThreeMeals() {
     })
 }
 
+async function findUsersWithAllExercises() {
+    return await withOracleDB(async (connection) => {
+        const sqlQuery = `
+            SELECT er.user_id
+            FROM ExerciseRecord er
+            GROUP BY er.user_id
+            HAVING COUNT(DISTINCT er.type) = (
+                SELECT COUNT(DISTINCT type) FROM ExerciseRecord
+            )
+        `;
+        const result = await connection.execute(sqlQuery);
+        return result.rows;
+    }).catch(() => {
+        return [];
+    });
+}
+
 module.exports = {
     fetchUserInfoFromDb,
     insertUserInfo,
     updateUserInfo,
     deleteFromUserInfo,
     countUserInfo,
-    findUsersWithMoreThanThreeMeals
+    findUsersWithMoreThanThreeMeals,
+    findUsersWithAllExercises
 };
