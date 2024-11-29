@@ -4,6 +4,7 @@ const userController = require('./rest/user/userController');
 const goalsController = require('./rest/goals/goalsController');
 const mealsController = require('./rest/meals/mealsController');
 const macrosController = require('./rest/Macros/MacrosController');
+const recipeController = require('./rest/recipe/recipeController');
 const exercisesController = require('./rest/exercise/exercisesController');
 const ingredientController = require('./rest/Ingredient/IngredientController');
 
@@ -50,8 +51,13 @@ app.get('/exercise-info', (req, res) => {
     res.sendFile(__dirname + '/public/exercise/exercise-info.html');
 });
 
+app.get('/recipe-info', (req, res) => {
+    res.sendFile(__dirname + '/public/recipe/recipe-info.html');
+});
+
 // mount the routers
 app.use('/', appController);
+app.use('/', recipeController);
 app.use('/', userController);
 app.use('/', mealsController);
 app.use('/', goalsController);

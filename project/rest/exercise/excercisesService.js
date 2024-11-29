@@ -51,8 +51,10 @@ async function averageCaloriesBurned() {
 
 async function insertExerciseRecord(excercise_record_id, exercise_record_date, calories_burned, type, user_id) {
     return await withOracleDB(async (connection) => {
+        console.log("HERe's the date: ")
+        console.log('exercise_record_date:', exercise_record_date);
         const result = await connection.execute(
-            `INSERT INTO ExerciseRecord (excercise_record_id, exercise_record_date, calories_burned, type, user_id) VALUES (:excercise_record_id, :exercise_record_date, :calories_burned, :type, :user_id)`,
+            `INSERT INTO ExerciseRecord (excercise_record_id, exercise_record_date, calories_burned, type, user_id) VALUES (:excercise_record_id, TO_DATE(:exercise_record_date, 'YYYY-MM-DD'), :calories_burned, :type, :user_id)`,
             [excercise_record_id, exercise_record_date, calories_burned, type, user_id],
             { autoCommit: true }
         );

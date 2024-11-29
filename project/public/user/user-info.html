@@ -86,6 +86,22 @@
     <!-- A placeholder to display the count result. -->
     <div id="countResultMsg"></div> <br>
 
+    <h1>Users with More Than 3 Meals</h1>
+    <button id="loadMealRecords">Fetch Data</button>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>User ID</th>
+                <th>Username</th>
+                <th>Meal Count</th>
+            </tr>
+        </thead>
+        <tbody id="user-table-body">
+            <!-- Data will be injected here -->
+        </tbody>
+    </table>
+    <div id="mealRecordsContainer"></div>
+
     <!-- ===================================================================================== -->
     <!-- External JavaScript file that contains the functionality/logic for the operations above. -->
     <script src="/user/user-info-script.js"></script>

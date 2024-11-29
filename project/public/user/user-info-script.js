@@ -38,9 +38,9 @@ async function fetchAndDisplayUsers() {
     });
 }
 
-// Inserts new records into the userinfo.
 async function insertUserInfo(event) {
     event.preventDefault();
+    console.log("HELLOKMLNDFKS")
 
     const userId = document.getElementById("insertId").value;
     const username = document.getElementById("insertName").value;
@@ -79,7 +79,6 @@ async function insertUserInfo(event) {
     }
 }
 
-// Updates names in the userinfo.
 async function updateUserInfo(event) {
     event.preventDefault();
 
@@ -118,7 +117,6 @@ async function updateUserInfo(event) {
     }
 }
 
-// Deletes given row in the userinfo.
 async function deleteUserInfo(event) {
     event.preventDefault();
     const userId = document.getElementById("deleteId").value;
@@ -148,8 +146,6 @@ async function deleteUserInfo(event) {
     }
 }
 
-// Counts rows in the userinfo.
-// Modify the function accordingly if using different aggregate functions or procedures.
 async function countUserInfo() {
     const response = await fetch("/count-userinfo", {
         method: 'GET'
@@ -166,6 +162,37 @@ async function countUserInfo() {
     }
 }
 
+async function getUsersWithMoreThanThreeMeals() {
+    const tableBody = document.getElementById('user-table-body');
+
+    tableBody.innerHTML = '';
+
+    try {
+        const response = await fetch('/users-with-more-than-three-meals');
+        const data = await response.json();
+        console.log(data)
+        if (response.ok && data.data && data.data.length > 0) {
+            data.data.forEach(user => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${user[0]}</td>
+                    <td>${user[1]}</td>
+                    <td>${user[2]}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+        } else {
+            const row = document.createElement('tr');
+            row.innerHTML = `<td colspan="3">No users found with more than three meals.</td>`;
+            tableBody.appendChild(row);
+        }
+    } catch (error) {
+        console.error('Error fetching data:', error);
+        const row = document.createElement('tr');
+        row.innerHTML = `<td colspan="3">An error occurred while fetching data.</td>`;
+        tableBody.appendChild(row);
+    }
+}
 
 // ---------------------------------------------------------------
 // Initializes the webpage functionalities.
@@ -176,6 +203,7 @@ window.onload = function() {
     document.getElementById("updateUserInfo").addEventListener("submit", updateUserInfo);
     document.getElementById("deleteUserInfo").addEventListener("submit", deleteUserInfo);
     document.getElementById("countUserInfo").addEventListener("click", countUserInfo);
+    document.getElementById('loadMealRecords').addEventListener('click', getUsersWithMoreThanThreeMeals);
 };
 
 // General function to refresh the displayed table data. 

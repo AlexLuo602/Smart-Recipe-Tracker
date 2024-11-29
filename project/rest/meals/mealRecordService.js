@@ -30,7 +30,7 @@ async function fetchMealRecordsFromDb() {
 async function insertMealRecord(meal_record_id, meal_record_date, user_id, recipe_id) {
     return await withOracleDB(async (connection) => {
         const result = await connection.execute(
-            `INSERT INTO MealRecord (meal_record_id, meal_record_date, user_id, recipe_id) VALUES (:meal_record_id, :meal_record_date, :user_id, :recipe_id)`,
+            `INSERT INTO MealRecord (meal_record_id, meal_record_date, user_id, recipe_id) VALUES (:meal_record_id, TO_DATE(:meal_record_date, 'YYYY-MM-DD'), :user_id, :recipe_id)`,
             [meal_record_id, meal_record_date, user_id, recipe_id],
             { autoCommit: true }
         );
@@ -77,10 +77,31 @@ async function countMealRecords() {
     }).catch(() => -1);
 }
 
+async function getMealsForUser(userId) {
+    return await withOracleDB(async (connection) => {
+        console.log("TIS THE USER ID")
+        console.log(userId)
+        try {
+            const query = `
+                SELECT mr.meal_record_id, mr.meal_record_date, mr.recipe_id, r.name AS recipe_name
+                FROM MealRecord mr
+                JOIN Recipe r ON mr.recipe_id = r.recipe_id
+                WHERE mr.user_id = :userId
+            `;
+            const result = await connection.execute(query, { userId }, { outFormat: oracledb.OUT_FORMAT_OBJECT });
+            return result.rows;
+        } catch (err) {
+            console.error('Error fetching meals for user:', err);
+            throw err;
+        }
+    })
+}
+
 module.exports = {
     fetchMealRecordsFromDb,
     insertMealRecord,
     updateMealRecord,
     deleteFromMealRecords,
     countMealRecords,
+    getMealsForUser,
 };

@@ -62,5 +62,16 @@ router.get('/count-userinfo', async (req, res) => {
     }
 });
 
+router.get('/users-with-more-than-three-meals', async (req, res) => {
+    try {
+    console.log("UBIN")
+      const records = await userService.findUsersWithMoreThanThreeMeals();
+      res.json({ data: records });
+    } catch (err) {
+      console.error('Error fetching meal records:', err);
+      res.status(500).json({ error: 'Error while fetching meal records' });
+    }
+});
+
 
 module.exports = router;

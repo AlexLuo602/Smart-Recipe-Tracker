@@ -1,4 +1,5 @@
 async function fetchAndDisplayMealRecords() {
+    console.log('hello')
     const tableElement = document.getElementById('mealRecords');
     const tableBody = tableElement.querySelector('tbody');
 
@@ -24,7 +25,7 @@ async function fetchAndDisplayMealRecords() {
 
 async function insertMealRecord(event) {
     event.preventDefault();
-
+    console.log("HELLO I AM HERE")
     const mealRecordId = document.getElementById("insertMealRecordId").value;
     const mealRecordDate = document.getElementById("insertMealRecordDate").value;
     const userId = document.getElementById("insertUserId").value;
@@ -133,12 +134,72 @@ async function countMealRecords() {
     }
 }
 
+async function getMealRecordsForUser() {
+    const userId = document.getElementById('userId').value;
+    const errorMessage = document.getElementById('errorMessage');
+    const mealTable = document.getElementById('mealTable');
+    const tableBody = mealTable.querySelector('tbody');
+
+    errorMessage.style.display = 'none';
+    errorMessage.textContent = '';
+    tableBody.innerHTML = '';
+    mealTable.style.display = 'none';
+
+    if (!userId || isNaN(userId)) {
+        errorMessage.textContent = 'Please enter a valid User ID.';
+        errorMessage.style.display = 'block';
+        return;
+    }
+
+    try {
+        const response = await fetch(`/get-meals-for-user`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                user_id: userId,
+            })
+        });
+
+        if (!response.ok) {
+            throw new Error(`Error: ${response.status} ${response.statusText}`);
+        }
+
+        const data = await response.json();
+
+        if (data.data.length === 0) {
+            errorMessage.textContent = 'No meal records found for this user.';
+            errorMessage.style.display = 'block';
+            return;
+        }
+
+        data.data.forEach(record => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${record.MEAL_RECORD_ID}</td>
+                <td>${new Date(record.MEAL_RECORD_DATE).toLocaleDateString()}</td>
+                <td>${record.RECIPE_ID}</td>
+                <td>${record.RECIPE_NAME}</td>
+            `;
+            tableBody.appendChild(row);
+        });
+
+        // Display the table
+        mealTable.style.display = 'table';
+    } catch (error) {
+        errorMessage.textContent = error.message;
+        errorMessage.style.display = 'block';
+    }
+}
+
 window.onload = function() {
     fetchMealRecordData();
     document.getElementById("insertMealRecord").addEventListener("submit", insertMealRecord);
     document.getElementById("updateMealRecord").addEventListener("submit", updateMealRecord);
     document.getElementById("deleteMealRecord").addEventListener("submit", deleteMealRecord);
     document.getElementById("countMealRecords").addEventListener("click", countMealRecords);
+    document.getElementById('fetchMeals').addEventListener("click", getMealRecordsForUser);
 };
 
 function fetchMealRecordData() {

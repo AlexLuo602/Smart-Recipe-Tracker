@@ -1,5 +1,5 @@
 const express = require('express');
-const mealRecordService = require('./mealRecordService'); // Adjust path as necessary
+const mealRecordService = require('./mealRecordService');
 
 const router = express.Router();
 
@@ -44,13 +44,30 @@ router.delete('/delete-meal-record', async (req, res) => {
     }
 });
 
-// Count meal records
 router.get('/count-meal-records', async (req, res) => {
     const count = await mealRecordService.countMealRecords();
     if (count >= 0) {
         res.json({ success: true, count });
     } else {
         res.status(500).json({ success: false });
+    }
+});
+
+router.get('/meal-records', async (req, res) => {
+    const records = await mealRecordService.fetchMealRecordsFromDb();
+    res.json({ data: records });
+});
+
+router.post('/get-meals-for-user', async (req, res) => {
+    const { user_id } = req.body;
+    console.log("CHUAIJMKJHUBGBHINUYG")
+    console.log(user_id)
+    try {
+        const records = await mealRecordService.getMealsForUser(Number(user_id));
+        res.json({ data: records });
+    } catch (error) {
+        console.error('Error fetching meal records:', error);
+        res.status(500).json({ error: 'Failed to fetch meal records.' });
     }
 });
 

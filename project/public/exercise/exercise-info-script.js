@@ -13,8 +13,8 @@
  */
 
 
-// Fetches data from the userinfo and displays it.
 async function fetchAndDisplayExerciseRecord() {
+    console.log("asdf")
     const tableElement = document.getElementById('exercises');
     const tableBody = tableElement.querySelector('tbody');
 
@@ -23,23 +23,21 @@ async function fetchAndDisplayExerciseRecord() {
     });
 
     const responseData = await response.json();
-    const goalsContent = responseData.data;
+    const exerciseContent = responseData.data;
 
-    // Always clear old, already fetched data before new fetching process.
     if (tableBody) {
         tableBody.innerHTML = '';
     }
 
-    goalsContent.forEach(goal => {
+    exerciseContent.forEach(exercise => {
         const row = tableBody.insertRow();
-        goal.forEach((field, index) => {
+        exercise.forEach((field, index) => {
             const cell = row.insertCell(index);
             cell.textContent = field;
         });
     });
 }
 
-// Inserts new records into the userinfo.
 async function insertExerciseRecord(event) {
     event.preventDefault();
 
@@ -76,7 +74,6 @@ async function insertExerciseRecord(event) {
     }
 }
 
-// Updates names in the userinfo.
 async function updateExerciseRecord(event) {
     event.preventDefault();
 
@@ -111,7 +108,6 @@ async function updateExerciseRecord(event) {
     }
 }
 
-// Deletes given row in the userinfo.
 async function deleteExerciseRecord(event) {
     event.preventDefault();
     const exerciseRecordId = document.getElementById("deleteExerciseRecordId").value;
@@ -141,6 +137,34 @@ async function deleteExerciseRecord(event) {
     }
 }
 
+async function fetchAndDisplayAverageCaloriesBurned() {
+    const tableElement = document.getElementById('caloriesTable');
+    const tableBody = tableElement.querySelector('tbody');
+
+    const response = await fetch('/averageBurntCalories', {
+        method: 'GET'
+    });
+
+    const responseData = await response.json();
+    const exerciseContent = responseData.data;
+
+    if (tableBody) {
+        tableBody.innerHTML = '';
+    }
+
+    console.log("the jewels: ")
+    console.log(exerciseContent)
+
+    exerciseContent.forEach(exercise => {
+        const row = tableBody.insertRow();
+        exercise.forEach((field, index) => {
+            const cell = row.insertCell(index);
+            cell.textContent = field;
+        });
+    });
+    tableElement.style.display = "table";
+}
+
 // ---------------------------------------------------------------
 // Initializes the webpage functionalities.
 // Add or remove event listeners based on the desired functionalities.
@@ -155,4 +179,5 @@ window.onload = function() {
 // You can invoke this after any table-modifying operation to keep consistency.
 function fetchTableData() {
     fetchAndDisplayExerciseRecord();
+    fetchAndDisplayAverageCaloriesBurned();
 }

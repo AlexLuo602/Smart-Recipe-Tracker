@@ -90,10 +90,36 @@ async function countUserInfo() {
     });
 }
 
+
+async function findUsersWithMoreThanThreeMeals() {
+    return await withOracleDB(async (connection) => {
+        try {
+            const sqlQuery = `
+              SELECT ui.user_id, ui.username, COUNT(mr.meal_record_id) AS meal_count
+              FROM UserInfo ui
+              JOIN MealRecord mr ON ui.user_id = mr.user_id
+              GROUP BY ui.user_id, ui.username
+              HAVING COUNT(mr.meal_record_id) > 3
+              ORDER BY meal_count DESC
+            `;
+            const result = await connection.execute(sqlQuery);
+
+            if (result.rows.length > 0) {
+                return result.rows.map((row) => [row[0], row[1], row[2]]);
+            } else {
+                return ['No users  with more than 3 meals.'];
+            }
+          } catch (err) {
+            console.error('Error executing:', err);
+          }
+    })
+}
+
 module.exports = {
     fetchUserInfoFromDb,
     insertUserInfo,
     updateUserInfo,
     deleteFromUserInfo,
-    countUserInfo
+    countUserInfo,
+    findUsersWithMoreThanThreeMeals
 };

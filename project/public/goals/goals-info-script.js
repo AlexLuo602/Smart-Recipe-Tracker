@@ -24,7 +24,6 @@ async function fetchAndDisplayGoals() {
     const responseData = await response.json();
     const goalsContent = responseData.data;
 
-    // Always clear old, already fetched data before new fetching process.
     if (tableBody) {
         tableBody.innerHTML = '';
     }
@@ -38,7 +37,6 @@ async function fetchAndDisplayGoals() {
     });
 }
 
-// Inserts new records into the userinfo.
 async function insertGoal(event) {
     event.preventDefault();
 
@@ -79,7 +77,6 @@ async function insertGoal(event) {
     }
 }
 
-// Updates names in the userinfo.
 async function updateGoal(event) {
     event.preventDefault();
 
@@ -118,7 +115,6 @@ async function updateGoal(event) {
     }
 }
 
-// Deletes given row in the userinfo.
 async function deleteGoal(event) {
     event.preventDefault();
     const goalId = document.getElementById("deleteGoalId").value;
@@ -148,8 +144,6 @@ async function deleteGoal(event) {
     }
 }
 
-// Counts rows in the userinfo.
-// Modify the function accordingly if using different aggregate functions or procedures.
 async function countGoals() {
     const response = await fetch("/count-goals", {
         method: 'GET'
