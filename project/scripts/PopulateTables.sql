@@ -183,6 +183,15 @@ INSERT INTO Ingredient (name, brand, taste, macro_id, food_type)
 VALUES ('Chicken Breast', 'Western Family', 'dryer than other brands', 2, 'poultry');
 
 INSERT INTO Ingredient (name, brand, taste, macro_id, food_type) 
+VALUES ('Chicken Leg', 'Western Family', 'dryer than other brands', 2, 'poultry');
+
+INSERT INTO Ingredient (name, brand, taste, macro_id, food_type) 
+VALUES ('Chicken Thigh', 'Western Family', 'dryer than other brands', 2, 'poultry');
+
+INSERT INTO Ingredient (name, brand, taste, macro_id, food_type) 
+VALUES ('Chicken Thigh', 'AAA', 'dryer than other brands', 2, 'poultry');
+
+INSERT INTO Ingredient (name, brand, taste, macro_id, food_type) 
 VALUES ('Parmesan Cheese', 'Western Family', 'more fragrant than average', 3, 'dairy');
 
 INSERT INTO Ingredient (name, brand, taste, macro_id, food_type) 
@@ -216,7 +225,19 @@ INSERT INTO MealRecord (meal_record_id, meal_record_date, user_id, recipe_id)
 VALUES (3, TO_DATE('2024-10-11', 'YYYY-MM-DD'), 3, 4);
 
 INSERT INTO MealRecord (meal_record_id, meal_record_date, user_id, recipe_id) 
-VALUES (4, TO_DATE('2024-10-10', 'YYYY-MM-DD'), 1, 5);
+VALUES (4, TO_DATE('2024-10-11', 'YYYY-MM-DD'), 1, 5);
+
+INSERT INTO MealRecord (meal_record_id, meal_record_date, user_id, recipe_id) 
+VALUES (6, TO_DATE('2024-10-02', 'YYYY-MM-DD'), 2, 1);
+
+INSERT INTO MealRecord (meal_record_id, meal_record_date, user_id, recipe_id) 
+VALUES (7, TO_DATE('2024-10-07', 'YYYY-MM-DD'), 2, 1);
+
+INSERT INTO MealRecord (meal_record_id, meal_record_date, user_id, recipe_id) 
+VALUES (8, TO_DATE('2024-10-29', 'YYYY-MM-DD'), 2, 1);
+
+INSERT INTO MealRecord (meal_record_id, meal_record_date, user_id, recipe_id) 
+VALUES (9, TO_DATE('2024-10-19', 'YYYY-MM-DD'), 2, 1);
 
 INSERT INTO MealRecord (meal_record_id, meal_record_date, user_id, recipe_id) 
 VALUES (5, TO_DATE('2024-10-09', 'YYYY-MM-DD'), 2, 1);
