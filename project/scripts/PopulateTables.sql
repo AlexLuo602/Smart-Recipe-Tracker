@@ -158,6 +158,9 @@ VALUES (4, 'Steak Frites');
 INSERT INTO Recipe (recipe_id, name) 
 VALUES (5, 'Fettucine Alfredo');
 
+INSERT INTO Recipe (recipe_id, name) 
+VALUES (6, 'Chicken Fried Rice');
+
 INSERT INTO UserInfo (user_id, username, weight, height, gender, age, recommended_calorie_intake)
 VALUES (1, 'John Doe the 1st', 70.00, 175, 'Male', 30, 2500);
 
@@ -310,6 +313,15 @@ VALUES (2, 'Simmer cream, add cheese.', 5);
 
 INSERT INTO Step (step_number, description, recipe_id) 
 VALUES (3, 'Toss pasta in sauce.', 5);
+
+INSERT INTO Step (step_number, description, recipe_id) 
+VALUES (1, 'Cook the chicken until a light white color', 6);
+
+INSERT INTO Step (step_number, description, recipe_id) 
+VALUES (2, 'Add in the rice and stirfry for 2 minutes', 6);
+
+INSERT INTO Step (step_number, description, recipe_id) 
+VALUES (3, 'Add 5 grams of salt and 10 grams of soy sauce', 6);
 
 INSERT INTO DiabeticPerson (diabetic_person_id, insulin_level, recommended_sugar_intake) 
 VALUES (1, 5.00, 55);

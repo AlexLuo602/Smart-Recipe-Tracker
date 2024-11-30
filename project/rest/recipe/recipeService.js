@@ -58,9 +58,39 @@ async function selectRecipes(recipeId) {
     })
 }
 
+async function deleteFromRecipe(recipe_id) {
+    return await withOracleDB(async (connection) => {
+        const result = await connection.execute(
+            `DELETE FROM Recipe WHERE recipe_id=:recipe_id`,
+            [recipe_id],
+            { autoCommit: true }
+        );
+
+        return result.rowsAffected && result.rowsAffected > 0;
+    }).catch(() => {
+        return false;
+    });
+}
+
+async function deleteFromStep(step_number, recipe_id) {
+    return await withOracleDB(async (connection) => {
+        const result = await connection.execute(
+            `DELETE FROM Step WHERE step_number=:step_number AND recipe_id=:recipe_id`,
+            [step_number, recipe_id],
+            { autoCommit: true }
+        );
+
+        return result.rowsAffected && result.rowsAffected > 0;
+    }).catch(() => {
+        return false;
+    });
+}
+
 module.exports = {
     insertRecipe,
     fetchRecipesFromDb,
-    selectRecipes
+    selectRecipes,
+    deleteFromRecipe,
+    deleteFromStep
 };
 

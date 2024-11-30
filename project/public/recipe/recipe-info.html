@@ -17,6 +17,7 @@
         </thead>
         <tbody></tbody>
     </table>
+    <br><hr><br> <!-- ========================================================================= -->
 
     <h1>Steps For Recipe</h1>
     <label for="recipeId">Enter Recipe ID:</label>
@@ -35,6 +36,28 @@
     </table>
 
     <p id="errorMessage" style="display: none;"></p>
+    <br><hr><br> <!-- ========================================================================= -->
+
+    <h2>Delete From Steps</h2>
+    <form id="deleteStep">
+            Recipe ID: <input type="number" id="deleteRecipeId" placeholder="required" step="1" min="0" required> <br><br>
+            Step Number: <input type="number" id="deleteStepNumber" placeholder="required" step="1" min="0" required> <br><br>
+        <button type="submit">Remove</button>
+    </form>
+    
+    <!-- A placeholder to display messages related to the delete operation. -->
+    <div id="deleteStepInfoResultMsg"></div>
+    <br><hr><br> <!-- ========================================================================= -->
+
+    <h2>Delete From Recipes</h2>
+    <form id="deleteRecipe">
+            Recipe ID: <input type="number" id="deleteId" placeholder="required" step="1" min="0" required> <br><br>
+        <button type="submit">Remove</button>
+    </form>
+    
+    <!-- A placeholder to display messages related to the delete operation. -->
+    <div id="deleteRecipeInfoResultMsg"></div>
+    <br><hr><br> <!-- ========================================================================= -->
 
     <h2>Insert Recipe Record</h2>
     <form id="insertrecipe">
