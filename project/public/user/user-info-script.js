@@ -194,6 +194,34 @@ async function getUsersWithMoreThanThreeMeals() {
     }
 }
 
+async function getUsersWithAllExercises() {
+    const tableBody = document.getElementById('all-exercises-user-table-body');
+
+    tableBody.innerHTML = '';
+    try {
+        const response = await fetch('/users-with-all-exercises');
+        const data = await response.json();
+        if (response.ok && data.data && data.data.length > 0) {
+            data.data.forEach(user => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${user[0]}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+        } else {
+            const row = document.createElement('tr');
+            row.innerHTML = `<td colspan="1">No users have performed all exercise types.</td>`;
+            tableBody.appendChild(row);
+        }
+    } catch (error) {
+        console.error('Error fetching data:', error);
+        const row = document.createElement('tr');
+        row.innerHTML = `<td colspan="1">An error occurred while fetching data.</td>`;
+        tableBody.appendChild(row);
+    }
+}
+
 // ---------------------------------------------------------------
 // Initializes the webpage functionalities.
 // Add or remove event listeners based on the desired functionalities.
@@ -204,6 +232,7 @@ window.onload = function() {
     document.getElementById("deleteUserInfo").addEventListener("submit", deleteUserInfo);
     document.getElementById("countUserInfo").addEventListener("click", countUserInfo);
     document.getElementById('loadMealRecords').addEventListener('click', getUsersWithMoreThanThreeMeals);
+    document.getElementById("loadAllExercisesUsers").addEventListener("click", getUsersWithAllExercises);
 };
 
 // General function to refresh the displayed table data. 

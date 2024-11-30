@@ -18,6 +18,16 @@ router.post('/insert-recipe', async (req, res) => {
     }
 });
 
+router.post('/search-recipes', async (req, res) => {
+    const conditionString = req.body.conditionString;
+    try {
+        const records = await recipeService.searchRecipes(conditionString);
+        res.json({ data: records });
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+});
+
 router.delete("/delete-from-recipe", async (req, res) => {
     const {recipe_id} = req.body;
     const deleteResult = await recipeService.deleteFromRecipe(recipe_id);

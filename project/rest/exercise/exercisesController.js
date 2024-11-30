@@ -13,6 +13,11 @@ router.get('/averageBurntCalories', async (req, res) => {
     res.json({ data: averageBurntCalories });
 });
 
+router.get('/highCalorieExercises', async (req, res) => {
+    const exercises = await exerciseService.getHighCalorieExercises();
+    res.json({ data: exercises });
+});
+
 router.post("/insert-exercise-record", async (req, res) => {
     const { excercise_record_id, exercise_record_date, calories_burned, type, user_id } = req.body;
     const insertResult = await exerciseService.insertExerciseRecord(excercise_record_id, exercise_record_date, calories_burned, type, user_id);

@@ -98,11 +98,32 @@ async function deleteExerciseRecord(excercise_record_id) {
     });
 }
 
+async function getHighCalorieExercises() {
+    return await withOracleDB(async (connection) => {
+        const query = `
+            SELECT E.type, SUM(E.calories_burned) AS total_calories_burned
+            FROM ExerciseRecord E
+            GROUP BY E.type
+            HAVING SUM(E.calories_burned) > (
+                SELECT AVG(total_calories)
+                FROM (
+                    SELECT SUM(E2.calories_burned) AS total_calories
+                    FROM ExerciseRecord E2
+                    GROUP BY E2.type
+                ) sub_totals
+            )`;
+        const result = await connection.execute(query);
+        return result.rows;
+    }).catch(() => {
+        return [];
+    });
+}
 
 module.exports = {
     averageCaloriesBurned,
     deleteExerciseRecord,
     updateExerciseRecord,
     insertExerciseRecord,
-    fetchExercisesFromDb
+    fetchExercisesFromDb,
+    getHighCalorieExercises
 };
