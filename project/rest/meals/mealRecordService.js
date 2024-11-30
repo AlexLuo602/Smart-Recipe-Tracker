@@ -30,7 +30,7 @@ async function fetchMealRecordsFromDb() {
 
 async function insertMealRecord(meal_record_id, meal_record_date, user_id, recipe_id) {
     const allParams = `${meal_record_id}, ${meal_record_date}, ${user_id}, ${recipe_id}`;
-    sanitize.sanitizeDropTable(allParams);
+    sanitize.sanitizeQuery(allParams);
     return await withOracleDB(async (connection) => {
         const result = await connection.execute(
             `INSERT INTO MealRecord (meal_record_id, meal_record_date, user_id, recipe_id) VALUES (:meal_record_id, TO_DATE(:meal_record_date, 'YYYY-MM-DD'), :user_id, :recipe_id)`,
@@ -44,7 +44,7 @@ async function insertMealRecord(meal_record_id, meal_record_date, user_id, recip
 
 async function updateMealRecord(meal_record_id, ToUpdate) {
     const allParams = `${meal_record_id}, ${ToUpdate}`;
-    sanitize.sanitizeDropTable(allParams);
+    sanitize.sanitizeQuery(allParams);
     const valClause = Object.entries(ToUpdate)
         .map(([attribute, val]) => `${attribute}=:${attribute}`)
         .join(", ");
@@ -84,7 +84,7 @@ async function countMealRecords() {
 
 async function getMealsForUser(userId) {
     const allParams = `${userId}`;
-    sanitize.sanitizeDropTable(allParams);
+    sanitize.sanitizeQuery(allParams);
     return await withOracleDB(async (connection) => {
         console.log(userId)
         try {

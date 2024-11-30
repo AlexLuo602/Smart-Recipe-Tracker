@@ -200,11 +200,11 @@ window.onload = function() {
     document.getElementById("updateExerciseRecord").addEventListener("submit", updateExerciseRecord);
     document.getElementById("deleteExerciseRecord").addEventListener("submit", deleteExerciseRecord);
     document.getElementById('fetchHighCalorieExercises').addEventListener('click', fetchAndDisplayHighCalorieExercises);
+    document.getElementById('loadAverageCalories').addEventListener('click', fetchAndDisplayAverageCaloriesBurned);
 };
 
 // General function to refresh the displayed table data. 
 // You can invoke this after any table-modifying operation to keep consistency.
 function fetchTableData() {
     fetchAndDisplayExerciseRecord();
-    fetchAndDisplayAverageCaloriesBurned();
 }

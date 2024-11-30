@@ -36,7 +36,7 @@ async function fetchGoalsFromDb() {
 
 async function insertGoal(goal_id, start_date, end_date, goals_type, value_diff, user_id, macro_id) {
     const allParams = `${goal_id}, ${start_date}, ${end_date}, ${goals_type}, ${value_diff}, ${user_id}, ${macro_id}`;
-    sanitize.sanitizeDropTable(allParams);
+    sanitize.sanitizeQuery(allParams);
     return await withOracleDB(async (connection) => {
         const result = await connection.execute(
             `INSERT INTO Goals (goal_id, start_date, end_date, goals_type, value_diff, user_id, macro_id) VALUES (:goal_id, :start_date, :end_date, :goals_type, :value_diff, :user_id, :macro_id)`,
@@ -52,7 +52,7 @@ async function insertGoal(goal_id, start_date, end_date, goals_type, value_diff,
 
 async function updateGoal(goal_id, ToUpdate) {
     const allParams = `${goal_id}, ${ToUpdate}`;
-    sanitize.sanitizeDropTable(allParams);
+    sanitize.sanitizeQuery(allParams);
     const valClause = Object.entries(ToUpdate).map(([attribute, val]) => `${attribute}=:${attribute}`).join(", ");
     if (valClause == "") return false;
 

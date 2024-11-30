@@ -38,7 +38,7 @@ async function fetchUserInfoFromDb() {
 async function insertUserInfo(user_id, username, weight, height, gender, age, rci) {
     return await withOracleDB(async (connection) => {
         const allParams = `${user_id},${username},${weight},${height},${gender},${age},${rci}`;
-        sanitize.sanitizeDropTable(allParams);
+        sanitize.sanitizeQuery(allParams);
         const result = await connection.execute(
             `INSERT INTO UserInfo (user_id, username, weight, height, gender, age, recommended_calorie_intake) VALUES (:user_id, :username, :weight, :height, :gender, :age, :rci)`,
             [user_id, username, weight, height, gender, age, rci],
@@ -52,12 +52,13 @@ async function insertUserInfo(user_id, username, weight, height, gender, age, rc
 }
 
 async function updateUserInfo(user_id, ToUpdate) {
-    const allParams = `${user_id},${ToUpdate}`;
-    sanitize.sanitizeDropTable(allParams);
     const valClause = Object.entries(ToUpdate).map(([attribute, val]) => `${attribute}=:${attribute}`).join(", ");
     if (valClause == "") return false;
 
     const values = Object.values(ToUpdate);
+
+    const sanitizedValues = Object.values(ToUpdate).map((val) => sanitize.sanitizeQuery(val));
+    const sanitizedUserId = sanitize.sanitizeQuery(user_id);
 
     return await withOracleDB(async (connection) => {
         const result = await connection.execute(
@@ -74,7 +75,7 @@ async function updateUserInfo(user_id, ToUpdate) {
 
 async function deleteFromUserInfo(user_id) {
     const allParams = `${user_id}`;
-    sanitize.sanitizeDropTable(allParams);
+    sanitize.sanitizeQuery(allParams);
     return await withOracleDB(async (connection) => {
         const result = await connection.execute(
             `DELETE FROM UserInfo WHERE user_id=:user_id`,

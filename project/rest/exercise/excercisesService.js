@@ -52,7 +52,7 @@ async function averageCaloriesBurned() {
 
 async function insertExerciseRecord(excercise_record_id, exercise_record_date, calories_burned, type, user_id) {
     const allParams = `${excercise_record_id}, ${exercise_record_date}, ${calories_burned}, ${type}, ${user_id}`;
-    sanitize.sanitizeDropTable(allParams);
+    sanitize.sanitizeQuery(allParams);
     return await withOracleDB(async (connection) => {
         console.log("HERe's the date: ")
         console.log('exercise_record_date:', exercise_record_date);

@@ -36,7 +36,7 @@ async function fetchMacrosFromDb() {
 
 async function insertMacro(macro_id, fiber, sugar, fat, carbohydrates, protein, calories) {
     const allParams = `${macro_id}, ${fiber}, ${sugar}, ${fat}, ${carbohydrates}, ${protein}, ${calories}`;
-    sanitize.sanitizeDropTable(allParams);
+    sanitize.sanitizeQuery(allParams);
     return await withOracleDB(async (connection) => {
         const result = await connection.execute(
             `INSERT INTO Macros (macro_id, fiber, sugar, fat, carbohydrates, protein, calories) VALUES (:macro_id, :fiber, :sugar, :fat, :carbohydrates, :protein, :calories)`,
@@ -51,7 +51,7 @@ async function insertMacro(macro_id, fiber, sugar, fat, carbohydrates, protein, 
 
 async function updateMacro(macro_id, ToUpdate) {
     const allParams = `${macro_id}, ${ToUpdate}`;
-    sanitize.sanitizeDropTable(allParams);
+    sanitize.sanitizeQuery(allParams);
     const valClause = Object.entries(ToUpdate).map(([attribute, val]) => `${attribute}=:${attribute}`).join(", ");
     if (valClause == "") return false;
     const values = Object.values(ToUpdate);

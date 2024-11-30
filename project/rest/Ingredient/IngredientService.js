@@ -37,7 +37,7 @@ async function fetchIngredientsFromDb() {
 
 async function insertIngredient(name, brand, taste, food_type, macro_id) {
     const allParams = `${name}, ${brand}, ${taste}, ${food_type}, ${macro_id}`;
-    sanitize.sanitizeDropTable(allParams);
+    sanitize.sanitizeQuery(allParams);
     return await withOracleDB(async (connection) => {
         const result = await connection.execute(
             `INSERT INTO Ingredient (name, brand, taste, food_type, macro_id) VALUES (:name, :brand, :taste, :food_type, :macro_id)`,
@@ -53,7 +53,7 @@ async function insertIngredient(name, brand, taste, food_type, macro_id) {
 
 async function updateIngredient(name, brand, ToUpdate) {
     const allParams = `${name}, ${brand}, ${ToUpdate}`;
-    sanitize.sanitizeDropTable(allParams);
+    sanitize.sanitizeQuery(allParams);
     const valClause = Object.entries(ToUpdate).map(([attribute, val]) => `${attribute}=:${attribute}`).join(", ");
     if (valClause == "") return false;
 

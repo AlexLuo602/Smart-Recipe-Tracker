@@ -30,7 +30,7 @@ async function fetchRecipesFromDb() {
 
 async function insertRecipe(recipe_id, name) {
     const allParams = `${recipe_id}, ${name}`;
-    sanitize.sanitizeDropTable(allParams);
+    sanitize.sanitizeQuery(allParams);
     return await withOracleDB(async (connection) => {
         const result = await connection.execute(
             `INSERT INTO Recipe (recipe_id, name) VALUES (:recipe_id, :name)`,
