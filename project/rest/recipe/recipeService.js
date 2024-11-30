@@ -1,4 +1,5 @@
 const oracledb = require('oracledb');
+const sanitize = require('../sanitization')
 
 // Wrapper for OracleDB actionsss
 async function withOracleDB(action) {
@@ -28,6 +29,8 @@ async function fetchRecipesFromDb() {
 }
 
 async function insertRecipe(recipe_id, name) {
+    const allParams = `${recipe_id}, ${name}`;
+    sanitize.sanitizeDropTable(allParams);
     return await withOracleDB(async (connection) => {
         const result = await connection.execute(
             `INSERT INTO Recipe (recipe_id, name) VALUES (:recipe_id, :name)`,

@@ -1,4 +1,5 @@
 const oracledb = require('oracledb');
+const sanitize = require('../sanitization')
 
 // ----------------------------------------------------------
 // Wrapper to manage OracleDB actions, simplifying connection handling.
@@ -36,6 +37,8 @@ async function fetchUserInfoFromDb() {
 
 async function insertUserInfo(user_id, username, weight, height, gender, age, rci) {
     return await withOracleDB(async (connection) => {
+        const allParams = `${user_id},${username},${weight},${height},${gender},${age},${rci}`;
+        sanitize.sanitizeDropTable(allParams);
         const result = await connection.execute(
             `INSERT INTO UserInfo (user_id, username, weight, height, gender, age, recommended_calorie_intake) VALUES (:user_id, :username, :weight, :height, :gender, :age, :rci)`,
             [user_id, username, weight, height, gender, age, rci],
@@ -49,6 +52,8 @@ async function insertUserInfo(user_id, username, weight, height, gender, age, rc
 }
 
 async function updateUserInfo(user_id, ToUpdate) {
+    const allParams = `${user_id},${ToUpdate}`;
+    sanitize.sanitizeDropTable(allParams);
     const valClause = Object.entries(ToUpdate).map(([attribute, val]) => `${attribute}=:${attribute}`).join(", ");
     if (valClause == "") return false;
 
@@ -68,6 +73,8 @@ async function updateUserInfo(user_id, ToUpdate) {
 }
 
 async function deleteFromUserInfo(user_id) {
+    const allParams = `${user_id}`;
+    sanitize.sanitizeDropTable(allParams);
     return await withOracleDB(async (connection) => {
         const result = await connection.execute(
             `DELETE FROM UserInfo WHERE user_id=:user_id`,
