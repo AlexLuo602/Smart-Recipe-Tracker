@@ -107,7 +107,7 @@ async function findUsersWithMoreThanThreeMeals() {
             if (result.rows.length > 0) {
                 return result.rows.map((row) => [row[0], row[1], row[2]]);
             } else {
-                return ['No users  with more than 3 meals.'];
+                return ['No users with more than 3 meals.'];
             }
           } catch (err) {
             console.error('Error executing:', err);

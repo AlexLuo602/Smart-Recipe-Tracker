@@ -171,7 +171,7 @@ async function getUsersWithMoreThanThreeMeals() {
         const response = await fetch('/users-with-more-than-three-meals');
         const data = await response.json();
         console.log(data)
-        if (response.ok && data.data && data.data.length > 0) {
+        if (response.ok && data.data && data.data.length > 0 && data.data[0] !== "No users with more than 3 meals.") {
             data.data.forEach(user => {
                 const row = document.createElement('tr');
                 row.innerHTML = `
