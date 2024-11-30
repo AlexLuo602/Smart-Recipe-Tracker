@@ -62,4 +62,30 @@ router.get('/count-ingredient', async (req, res) => {
     }
 });
 
+router.post('/search-ingredients', async (req, res) => {
+    const conditionString = req.body.conditionString;
+    try {
+        const records = await ingredientService.searchRecipes(conditionString);
+        res.json({ data: records });
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+});
+
+router.post('/get-ingredient-fields', async (req, res) => {
+    const { fields } = req.body;
+
+    if (!fields || fields.length === 0) {
+        return res.status(400).json({ error: "No fields selected" });
+    }
+
+    const result = await ingredientService.getSelectedFields(fields);
+    if (result) {
+        res.json({ success: true, result: result });
+    } else {
+        res.status(500).json({ success: false });
+    }
+
+});
+
 module.exports = router;

@@ -143,6 +143,15 @@ VALUES (4, 6, 9, 9, 28, 13, 290);
 INSERT INTO Macros (macro_id, fiber, sugar, fat, carbohydrates, protein, calories) 
 VALUES (5, 2, 4, 5, 18, 8, 200);
 
+INSERT INTO Macros (macro_id, fiber, sugar, fat, carbohydrates, protein, calories) 
+VALUES (6, 3, 4, 5, 18, 8, 200);
+
+INSERT INTO Macros (macro_id, fiber, sugar, fat, carbohydrates, protein, calories) 
+VALUES (7, 4, 4, 5, 18, 8, 200);
+
+INSERT INTO Macros (macro_id, fiber, sugar, fat, carbohydrates, protein, calories) 
+VALUES (8, 5, 4, 5, 18, 8, 200);
+
 INSERT INTO Recipe (recipe_id, name) 
 VALUES (1, 'Chicken Salad');
 

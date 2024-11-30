@@ -34,6 +34,35 @@
 
     <br><hr><br> <!-- ========================================================================= -->
 
+    <h2>Search Ingredients</h2>
+    <form id="searchIngredientsForm">
+    Conditions: <input type="text" id="searchConditions" required>
+    <button type="submit">Search</button>
+    </form>
+    <div id="searchResults"></div>
+    <br><hr><br> <!-- ========================================================================= -->
+
+    <h2>View Specific Ingredient Fields</h2>
+    <form id="ingredientFieldsForm">
+        <div>
+            <input type="checkbox" id="selectAll" /> <label for="selectAll">Select All</label>
+        </div>
+        <div>
+            <input type="checkbox" id="name" name="fields" value="name" /> <label for="name">Name</label>
+            <input type="checkbox" id="brand" name="fields" value="brand" /> <label for="brand">Brand</label>
+            <input type="checkbox" id="taste" name="fields" value="taste" /> <label for="taste">Taste</label>
+            <input type="checkbox" id="macro_id" name="fields" value="macro_id" /> <label for="macro_id">Macro ID</label>
+            <input type="checkbox" id="food_type" name="fields" value="food_type" /> <label for="food_type">Food Type</label>
+        </div>
+        <button type="button" id="viewFieldsButton">View</button>
+    </form>
+
+    <!-- Table for displaying results -->
+    <table id="selectedIngredientTable" border="1" style="margin-top: 20px; display: none;">
+        <thead id="tableHead"></thead>
+        <tbody id="tableBody"></tbody>
+    </table>
+
     <h2> Insert Values into Ingredient </h2>
     <form id="insertIngredientForm">
         Name: <input type="text" id="insertName" placeholder="Enter Name" maxlength="255" required> <br><br>
