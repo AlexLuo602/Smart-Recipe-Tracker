@@ -28,4 +28,37 @@ router.post('/search-recipes', async (req, res) => {
     }
 });
 
+router.delete("/delete-from-recipe", async (req, res) => {
+    const {recipe_id} = req.body;
+    const deleteResult = await recipeService.deleteFromRecipe(recipe_id);
+    if (deleteResult) {
+        res.json({ success: true });
+    } else {
+        res.status(500).json({ success: false });
+    }
+});
+
+router.delete("/delete-from-step", async (req, res) => {
+    const {step_number, recipe_id} = req.body;
+    const deleteResult = await recipeService.deleteFromStep(step_number, recipe_id);
+    if (deleteResult) {
+        res.json({ success: true });
+    } else {
+        res.status(500).json({ success: false });
+    }
+});
+
+router.post('/select-recipes', async (req, res) => {
+    const { recipe_id } = req.body;
+    console.log("CHUAIJMKJHUBGBHINUYG")
+    console.log(recipe_id)
+    try {
+        const records = await recipeService.selectRecipes(Number(recipe_id));
+        res.json({ data: records });
+    } catch (error) {
+        console.error('Error fetching steps:', error);
+        res.status(500).json({ error: 'Failed to fetch steps.' });
+    }
+});
+
 module.exports = router;

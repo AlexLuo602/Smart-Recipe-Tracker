@@ -108,8 +108,58 @@ function buildSearchQuery(conditionString) {
     return { query, params };
 }
 
+async function selectRecipes(recipeId) {
+    return await withOracleDB(async (connection) => {
+        console.log(recipeId)
+        try {
+            const query = `
+                SELECT r.name AS recipe_name, step.step_number, step.description
+                FROM Step step
+                JOIN Recipe r ON step.recipe_id = r.recipe_id
+                WHERE r.recipe_id = :recipeId
+            `;
+            const result = await connection.execute(query, { recipeId }, { outFormat: oracledb.OUT_FORMAT_OBJECT });
+            return result.rows;
+        } catch (err) {
+            console.error('Error fetching steps for recipe:', err);
+            throw err;
+        }
+    })
+}
+
+async function deleteFromRecipe(recipe_id) {
+    return await withOracleDB(async (connection) => {
+        const result = await connection.execute(
+            `DELETE FROM Recipe WHERE recipe_id=:recipe_id`,
+            [recipe_id],
+            { autoCommit: true }
+        );
+
+        return result.rowsAffected && result.rowsAffected > 0;
+    }).catch(() => {
+        return false;
+    });
+}
+
+async function deleteFromStep(step_number, recipe_id) {
+    return await withOracleDB(async (connection) => {
+        const result = await connection.execute(
+            `DELETE FROM Step WHERE step_number=:step_number AND recipe_id=:recipe_id`,
+            [step_number, recipe_id],
+            { autoCommit: true }
+        );
+
+        return result.rowsAffected && result.rowsAffected > 0;
+    }).catch(() => {
+        return false;
+    });
+}
+
 module.exports = {
     insertRecipe,
     fetchRecipesFromDb,
+    selectRecipes,
+    deleteFromRecipe,
+    deleteFromStep,
     searchRecipes
 };
